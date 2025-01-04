@@ -37,8 +37,7 @@ import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 fun CartScreen(navController: NavHostController) {
     val viewModel: CartScreenViewModel = hiltViewModel()
     val cartMovies by viewModel.cartMovies.observeAsState(initial = emptyList())
-
-    viewModel.getMoviesInCart()
+    val isDeleting by viewModel.isDeleting.observeAsState(initial = false)
 
     Scaffold(topBar = {
         TopAppBar(title = { Text(text = "Your Cart", style = MaterialTheme.typography.titleLarge) })
@@ -61,7 +60,7 @@ fun CartScreen(navController: NavHostController) {
             ) {
                 items(cartMovies) { movie ->
                     MovieItem(cartMovies = movie,
-                        onRemoveClick = { /* Implement Remove Logic */ },
+                        onRemoveClick = { movieId -> viewModel.deleteMovieFromCart(movieId) },
                         onDecreaseClick = {},
                         onIncreaseClick = {})
                 }
@@ -69,6 +68,7 @@ fun CartScreen(navController: NavHostController) {
         }
     }
 }
+
 
 @Composable
 fun MovieItem(
@@ -110,7 +110,7 @@ fun MovieItem(
                 }
             }
             Spacer(modifier = Modifier.width(16.dp))
-            Button(onClick = { onRemoveClick }) {
+            Button(onClick = { onRemoveClick(cartMovies.cartId) }) {
                 Text("Remove")
             }
         }
