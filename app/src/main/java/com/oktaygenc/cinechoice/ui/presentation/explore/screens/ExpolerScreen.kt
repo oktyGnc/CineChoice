@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.google.gson.Gson
 import com.oktaygenc.cinechoice.data.model.Movie
 import com.oktaygenc.cinechoice.ui.presentation.explore.components.MovieCardForExplore
 import com.oktaygenc.cinechoice.ui.presentation.explore.components.SearchBar
@@ -44,7 +45,11 @@ fun ExploreScreen(
                         }) { movie ->
                             MovieCardForExplore(
                                 movie = movie,
-                                modifier = Modifier.padding(bottom = 8.dp)
+                                modifier = Modifier.padding(bottom = 8.dp),
+                                onNavigateDetail = {
+                                    val movieJson = Gson().toJson(it)
+                                    navController.navigate("detail/$movieJson")
+                                }
                             )
                         }
                     }

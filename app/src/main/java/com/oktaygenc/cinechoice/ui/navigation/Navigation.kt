@@ -42,7 +42,7 @@ fun Navigation(
                 onAction = viewModel::onAction
             )
         }
-        composable("explore") { ExploreScreen(navController) }
+        composable("explore") { ExploreScreen(navController)}
 
 
         composable("favorite") { FavoriteScreen(navController) }

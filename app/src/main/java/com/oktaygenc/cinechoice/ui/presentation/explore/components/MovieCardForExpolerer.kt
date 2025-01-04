@@ -1,5 +1,6 @@
 package com.oktaygenc.cinechoice.ui.presentation.explore.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,13 +25,14 @@ import com.oktaygenc.cinechoice.data.model.Movie
 import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 
 @Composable
-fun MovieCardForExplore(movie: Movie, modifier: Modifier = Modifier) {
+fun MovieCardForExplore(movie: Movie, modifier: Modifier = Modifier,onNavigateDetail: (Movie) -> Unit,) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .padding(
                 vertical = 3.dp
             )
+            .clickable { onNavigateDetail(movie) }
     ) {
         Row(
             modifier = Modifier
