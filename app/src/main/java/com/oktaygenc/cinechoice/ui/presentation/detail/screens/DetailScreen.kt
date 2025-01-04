@@ -19,32 +19,43 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.oktaygenc.cinechoice.data.model.Movie
+import com.oktaygenc.cinechoice.ui.presentation.detail.viewmodel.DetailScreenViewModel
 import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
-    Scaffold(topBar = {
-        TopAppBar(title = { Text(text = comingMovie.name, color = Color.White) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.DarkGray),
-            navigationIcon = {
-                IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back",
-                        tint = Color.White
-                    )
+
+    val viewModel: DetailScreenViewModel = hiltViewModel()
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(text = comingMovie.name, color = Color.White) },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.DarkGray),
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back",
+                            tint = Color.White
+                        )
+                    }
                 }
-            })
-    }) { paddingValues ->
+            )
+        }
+    ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -57,7 +68,7 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(300.dp)
+                    .height(200.dp)
                     .clip(MaterialTheme.shapes.medium)
             )
             Spacer(modifier = Modifier.height(16.dp))
@@ -80,7 +91,18 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
             Spacer(modifier = Modifier.weight(1f))
             Button(
                 onClick = {
-                    // Add to cart action
+                    navController.navigate("cart")
+                    viewModel.addMovieToCart(
+                        name = comingMovie.name,
+                        image = comingMovie.image,
+                        price = comingMovie.price,
+                        category = comingMovie.category,
+                        rating = comingMovie.rating,
+                        year = comingMovie.year,
+                        director = comingMovie.director,
+                        description = comingMovie.description,
+                        orderAmount = 1 // Default order amount
+                    )
                 },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.DarkGray)
