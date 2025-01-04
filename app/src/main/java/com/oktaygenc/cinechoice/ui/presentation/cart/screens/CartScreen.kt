@@ -37,7 +37,6 @@ import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 fun CartScreen(navController: NavHostController) {
     val viewModel: CartScreenViewModel = hiltViewModel()
     val cartMovies by viewModel.cartMovies.observeAsState(initial = emptyList())
-    val isDeleting by viewModel.isDeleting.observeAsState(initial = false)
 
     Scaffold(topBar = {
         TopAppBar(title = { Text(text = "Your Cart", style = MaterialTheme.typography.titleLarge) })
@@ -46,7 +45,7 @@ fun CartScreen(navController: NavHostController) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues),
+                    .padding(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -61,8 +60,19 @@ fun CartScreen(navController: NavHostController) {
                 items(cartMovies) { movie ->
                     MovieItem(cartMovies = movie,
                         onRemoveClick = { movieId -> viewModel.deleteMovieFromCart(movieId) },
-                        onDecreaseClick = {},
-                        onIncreaseClick = {})
+                        onDecreaseClick = { movieId -> viewModel.deleteMovieFromCart(movieId) },
+                        onIncreaseClick = { viewModel.addMovieToCart(
+                                name = movie.name,
+                                image = movie.image,
+                                price = movie.price,
+                                category = movie.category,
+                                rating = movie.rating,
+                                year = movie.year,
+                                director = movie.director,
+                                description = movie.description,
+                                orderAmount = movie.orderAmount
+                            )
+                        })
                 }
             }
         }
@@ -75,7 +85,7 @@ fun MovieItem(
     cartMovies: CardItem,
     onRemoveClick: (Int) -> Unit,
     onIncreaseClick: (Int) -> Unit,
-    onDecreaseClick: (Int) -> Unit
+    onDecreaseClick: (Int) -> Unit,
 ) {
     Card(
         modifier = Modifier
@@ -84,8 +94,7 @@ fun MovieItem(
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
                 model = getImageUrl(cartMovies.image),
@@ -96,13 +105,19 @@ fun MovieItem(
             Spacer(modifier = Modifier.width(16.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(text = cartMovies.name, style = MaterialTheme.typography.titleLarge)
-                Text(text = "Price: ${cartMovies.price}$", style = MaterialTheme.typography.bodyMedium)
+                Text(
+                    text = "Price: ${cartMovies.price}$",
+                    style = MaterialTheme.typography.bodyMedium
+                )
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Button(onClick = { onDecreaseClick(cartMovies.cartId) }) {
                         Text("-")
                     }
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = cartMovies.orderAmount.toString(), style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        text = cartMovies.orderAmount.toString(),
+                        style = MaterialTheme.typography.bodyMedium
+                    )
                     Spacer(modifier = Modifier.width(8.dp))
                     Button(onClick = { onIncreaseClick(cartMovies.cartId) }) {
                         Text("+")

@@ -23,9 +23,6 @@ class CartScreenViewModel @Inject constructor(
     private val _cartMovies = MutableLiveData<List<CardItem>>()
     val cartMovies: LiveData<List<CardItem>> get() = _cartMovies
 
-    private val _isDeleting = MutableLiveData<Boolean>()
-    val isDeleting: LiveData<Boolean> get() = _isDeleting
-
     init {
         getMoviesInCart() // Varsayılan kullanıcı
     }
@@ -48,7 +45,7 @@ class CartScreenViewModel @Inject constructor(
             _cartMovies.value = _cartMovies.value?.filter { it.cartId != cartId }
             when (val resource = deleteMovieFromCartUseCase.invoke(cartId)) {
                 is Resource.Success -> {
-                    getMoviesInCart()
+                        getMoviesInCart()
                 }
                 is Resource.Error -> {
                     Log.e("CartViewModel", "Error deleting movie from cart: ${resource.message}")
