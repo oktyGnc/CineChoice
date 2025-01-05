@@ -17,6 +17,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
+import com.oktaygenc.cinechoice.ui.theme.TextSelectedButtonColor
+import com.oktaygenc.cinechoice.ui.theme.UnSelectedButtonColor
+import com.oktaygenc.cinechoice.ui.theme.UnTextSelectedButtonColor
 
 @Composable
 fun SingleSelectionButtons(onCategorySelected: (String) -> Unit) {
@@ -37,8 +41,8 @@ fun SingleSelectionButtons(onCategorySelected: (String) -> Unit) {
                 },
                 modifier = Modifier.padding(4.dp),
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = if (category == selectedCategory.value) Color.White else Color.Black,
-                    backgroundColor = if (category == selectedCategory.value) Color.Yellow else Color.White
+                    contentColor = if (category == selectedCategory.value) TextSelectedButtonColor else UnTextSelectedButtonColor,
+                    backgroundColor = if (category == selectedCategory.value) SelectedButtonColor else UnSelectedButtonColor
 
                 )
             ) {
