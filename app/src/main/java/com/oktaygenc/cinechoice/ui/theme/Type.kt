@@ -2,9 +2,11 @@ package com.oktaygenc.cinechoice.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.oktaygenc.cinechoice.R
 
 // Set of Material typography styles to start with
 val Typography = Typography(
@@ -32,3 +34,5 @@ val Typography = Typography(
     )
     */
 )
+
+val lobster = FontFamily(Font(R.font.lobsterregular))

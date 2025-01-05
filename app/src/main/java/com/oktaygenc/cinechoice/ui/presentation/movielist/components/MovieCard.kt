@@ -39,6 +39,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.oktaygenc.cinechoice.data.model.Movie
+import com.oktaygenc.cinechoice.ui.theme.DeleteColor
+import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
 import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 
 
@@ -70,7 +72,7 @@ fun MovieCard(
                 modifier = Modifier
                     .padding(8.dp)
                     .align(Alignment.TopEnd),
-                color = Color.Red,
+                color = SelectedButtonColor,
                 shape = RoundedCornerShape(50.dp)
             ) {
                 Text(
@@ -91,7 +93,7 @@ fun MovieCard(
                 Icon(
                     imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                     contentDescription = "Favorite",
-                    tint = if (isFavorite) Color.Red else Color.White,
+                    tint = if (isFavorite) SelectedButtonColor else Color.White,
                     modifier = Modifier.size(28.dp)
                 )
             }
@@ -118,7 +120,7 @@ fun MovieCard(
                     imageVector = Icons.Filled.Star,
                     contentDescription = null,
                     modifier = Modifier.size(20.dp),
-                    tint = Color(0xFFFFB800)
+                    tint = SelectedButtonColor
                 )
                 Text(
                     text = movie.rating.toString(), fontSize = 15.sp, color = Color.Gray
@@ -152,7 +154,7 @@ fun MovieCard(
                     Icon(
                         imageVector = Icons.Filled.ShoppingCart,
                         contentDescription = "Add to Cart",
-                        tint = MaterialTheme.colorScheme.primary
+                        tint = DeleteColor
                     )
                 }
             }
