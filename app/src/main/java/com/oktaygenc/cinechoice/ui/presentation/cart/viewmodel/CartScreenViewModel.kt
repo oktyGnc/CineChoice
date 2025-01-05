@@ -11,6 +11,7 @@ import com.oktaygenc.cinechoice.usecase.DeleteMovieFromCartUseCase
 import com.oktaygenc.cinechoice.usecase.GetMoviesInCartUseCase
 import com.oktaygenc.cinechoice.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

@@ -38,6 +38,9 @@ import com.oktaygenc.cinechoice.ui.presentation.movielist.components.MovieCard
 import com.oktaygenc.cinechoice.ui.presentation.movielist.components.SingleSelectionButtons
 import com.oktaygenc.cinechoice.ui.presentation.movielist.state.MoviesAction
 import com.oktaygenc.cinechoice.ui.presentation.movielist.state.MoviesState
+import com.oktaygenc.cinechoice.ui.theme.DeleteColor
+import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
+import com.oktaygenc.cinechoice.ui.theme.TopBarColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,14 +56,14 @@ fun MovieListScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.DarkGray),
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor),
                 title = {
                     Box(
                         modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center
                     ) {
                         Text(
                             text = "CineChoice",
-                            color = Color.White,
+                            color = TopBarColor,
                             fontWeight = FontWeight.Bold,
                             fontSize = 28.sp,
                             modifier = Modifier.padding(start = 20.dp)
@@ -75,7 +78,7 @@ fun MovieListScreen(
                             modifier = Modifier.size(30.dp),
                             imageVector = Icons.Default.ShoppingCart,
                             contentDescription = "Cart",
-                            tint = Color.White
+                            tint = DeleteColor
                         )
                     }
                 },

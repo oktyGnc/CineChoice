@@ -14,18 +14,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.oktaygenc.cinechoice.ui.presentation.cart.components.MovieItem
 import com.oktaygenc.cinechoice.ui.presentation.cart.viewmodel.CartScreenViewModel
-import kotlinx.coroutines.delay
+import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,14 +39,22 @@ fun CartScreen(navController: NavHostController) {
     // Toplam tutarı hesaplayan fonksiyon
     val totalAmount = cartMovies.sumOf { it.price * it.orderAmount }
 
-    Scaffold(topBar = {
-        TopAppBar(title = { Text(text = "Your Cart", style = MaterialTheme.typography.titleLarge) })
-    }) { paddingValues ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = "Your Cart", style = MaterialTheme.typography.titleLarge)
+                }, colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor)
+            )
+
+        }, containerColor = Color.White
+
+    ) { paddingValues ->
         if (isLoading) {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 CircularProgressIndicator()
             }
@@ -70,8 +80,7 @@ fun CartScreen(navController: NavHostController) {
                         .fillMaxSize()
                 ) {
                     items(cartMovies) { movie ->
-                        MovieItem(
-                            cartMovies = movie,
+                        MovieItem(cartMovies = movie,
                             onRemoveClick = { movieId -> viewModel.deleteMovieFromCart(movieId) },
                             onDecreaseClick = { movieId -> viewModel.deleteMovieFromCart(movieId) },
                             onIncreaseClick = {
@@ -86,8 +95,7 @@ fun CartScreen(navController: NavHostController) {
                                     description = movie.description,
                                     orderAmount = movie.orderAmount
                                 )
-                            }
-                        )
+                            })
                     }
                 }
 
@@ -105,5 +113,7 @@ fun CartScreen(navController: NavHostController) {
         }
     }
 }
+
+
 
 
