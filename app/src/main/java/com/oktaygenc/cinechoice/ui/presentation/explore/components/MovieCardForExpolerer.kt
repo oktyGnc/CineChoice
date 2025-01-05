@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,6 +24,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.oktaygenc.cinechoice.data.model.Movie
+import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
+import com.oktaygenc.cinechoice.ui.theme.TextSelectedButtonColor
+import com.oktaygenc.cinechoice.ui.theme.UnSelectedButtonColor
 import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 
 @Composable
@@ -29,10 +34,12 @@ fun MovieCardForExplore(movie: Movie, modifier: Modifier = Modifier,onNavigateDe
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(
-                vertical = 3.dp
-            )
-            .clickable { onNavigateDetail(movie) }
+            .padding(vertical = 3.dp)
+            .clickable { onNavigateDetail(movie) },
+        elevation = CardDefaults.cardElevation(4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = TextSelectedButtonColor,
+        )
     ) {
         Row(
             modifier = Modifier
@@ -72,7 +79,7 @@ fun MovieCardForExplore(movie: Movie, modifier: Modifier = Modifier,onNavigateDe
                         imageVector = Icons.Filled.Star,
                         contentDescription = null,
                         modifier = Modifier.size(20.dp),
-                        tint = Color.Yellow
+                        tint = SelectedButtonColor
                     )
                     Text(
                         text = movie.rating.toString(), style = MaterialTheme.typography.bodyMedium

@@ -21,6 +21,7 @@ import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
 import com.oktaygenc.cinechoice.ui.theme.TextSelectedButtonColor
 import com.oktaygenc.cinechoice.ui.theme.UnSelectedButtonColor
 import com.oktaygenc.cinechoice.ui.theme.UnTextSelectedButtonColor
+import com.oktaygenc.cinechoice.ui.theme.oswald
 
 @Composable
 fun SingleSelectionButtons(onCategorySelected: (String) -> Unit) {
@@ -42,9 +43,10 @@ fun SingleSelectionButtons(onCategorySelected: (String) -> Unit) {
                 modifier = Modifier.padding(4.dp),
                 colors = ButtonDefaults.buttonColors(
                     contentColor = if (category == selectedCategory.value) TextSelectedButtonColor else UnTextSelectedButtonColor,
-                    backgroundColor = if (category == selectedCategory.value) SelectedButtonColor else UnSelectedButtonColor
+                    backgroundColor = if (category == selectedCategory.value) SelectedButtonColor else UnSelectedButtonColor,
 
-                )
+
+                    )
             ) {
                 Text(text = category)
             }

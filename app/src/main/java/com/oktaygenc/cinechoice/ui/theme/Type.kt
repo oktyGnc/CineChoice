@@ -36,3 +36,4 @@ val Typography = Typography(
 )
 
 val lobster = FontFamily(Font(R.font.lobsterregular))
+val oswald = FontFamily(Font(R.font.oswaldvariable))

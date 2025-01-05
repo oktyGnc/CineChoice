@@ -41,6 +41,7 @@ import com.oktaygenc.cinechoice.ui.presentation.movielist.state.MoviesState
 import com.oktaygenc.cinechoice.ui.theme.DeleteColor
 import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
 import com.oktaygenc.cinechoice.ui.theme.TopBarColor
+import com.oktaygenc.cinechoice.ui.theme.lobster
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,8 +65,9 @@ fun MovieListScreen(
                         Text(
                             text = "CineChoice",
                             color = TopBarColor,
+                            fontFamily = lobster,
                             fontWeight = FontWeight.Bold,
-                            fontSize = 28.sp,
+                            fontSize = 36.sp,
                             modifier = Modifier.padding(start = 20.dp)
                         )
                     }

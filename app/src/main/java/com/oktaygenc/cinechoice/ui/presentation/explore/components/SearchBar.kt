@@ -15,7 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.oktaygenc.cinechoice.ui.presentation.explore.viewmodel.ExploreViewModel
+import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
+import com.oktaygenc.cinechoice.ui.theme.TopBarColor
+import com.oktaygenc.cinechoice.ui.theme.oswald
 
 @Composable
 fun SearchBar(
@@ -29,22 +33,22 @@ fun SearchBar(
         onValueChange = { newQuery ->
             viewModel.onSearchQueryChanged(newQuery) // ViewModel'deki searchQuery'yi güncelliyoruz
         },
-        label = { Text("Search") },
+        label = { Text("Search", color = TopBarColor,fontFamily = oswald, fontSize = 18.sp) },
         leadingIcon = {
             Icon(
-                imageVector = Icons.Default.Search, contentDescription = "Search Icon"
+                imageVector = Icons.Default.Search, contentDescription = "Search Icon", tint = TopBarColor
             )
         },
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(20.dp))
-            .background(MaterialTheme.colors.surface)
-            .padding(10.dp),
+            .background(MaterialTheme.colors.surface),
+
         singleLine = true,
         textStyle = MaterialTheme.typography.body1,
         shape = RoundedCornerShape(20.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = MaterialTheme.colors.primary,
+            focusedBorderColor = TopAndBottomBarColor,
             unfocusedBorderColor = MaterialTheme.colors.onSurface.copy(alpha = 0.3f),
             backgroundColor = MaterialTheme.colors.surface
         )

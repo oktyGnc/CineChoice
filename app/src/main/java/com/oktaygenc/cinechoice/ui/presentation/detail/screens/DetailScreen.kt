@@ -31,6 +31,10 @@ import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.oktaygenc.cinechoice.data.model.Movie
 import com.oktaygenc.cinechoice.ui.presentation.detail.viewmodel.DetailScreenViewModel
+import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
+import com.oktaygenc.cinechoice.ui.theme.TopBarColor
+import com.oktaygenc.cinechoice.ui.theme.lobster
+import com.oktaygenc.cinechoice.ui.theme.oswald
 import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,14 +46,14 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = comingMovie.name, color = Color.White) },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.DarkGray),
+                title = { Text(text = comingMovie.name, color = TopBarColor, fontFamily = oswald) },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor),
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back",
-                            tint = Color.White
+                            tint = TopBarColor
                         )
                     }
                 }

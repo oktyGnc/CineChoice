@@ -20,7 +20,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,6 +40,7 @@ import coil3.compose.AsyncImage
 import com.oktaygenc.cinechoice.data.model.Movie
 import com.oktaygenc.cinechoice.ui.theme.DeleteColor
 import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
+import com.oktaygenc.cinechoice.ui.theme.oswald
 import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 
 
@@ -107,6 +107,7 @@ fun MovieCard(
         ) {
             Text(
                 text = movie.name,
+                fontFamily = oswald,
                 fontSize = 19.sp,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(bottom = 8.dp)
@@ -138,13 +139,17 @@ fun MovieCard(
                 ) {
                     Text(
                         text = "$${movie.price * 2}", style = TextStyle(
+                            fontFamily = oswald,
                             textDecoration = TextDecoration.LineThrough,
                             color = Color.Gray,
                             fontSize = 13.sp
                         )
                     )
                     Text(
-                        text = "$${movie.price}", fontSize = 20.sp, fontWeight = FontWeight.Bold
+                        text = "$${movie.price}",
+                        fontFamily = oswald,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 

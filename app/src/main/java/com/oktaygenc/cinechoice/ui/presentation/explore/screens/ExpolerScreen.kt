@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -35,7 +36,8 @@ fun ExploreScreen(
     Scaffold(
         content = { paddingValues ->
             Box(modifier = Modifier.padding(paddingValues)) {
-                Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+                Column(modifier = Modifier.fillMaxSize().padding(16.dp)
+                ) {
                     SearchBar(viewModel = viewModel)
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -56,5 +58,6 @@ fun ExploreScreen(
                 }
             }
         },
+        containerColor = Color.White
     )
 }
