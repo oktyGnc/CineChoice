@@ -17,8 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailScreenViewModel @Inject constructor(private val addMovieToCartUseCase: AddMovieToCartUseCase) :
     ViewModel() {
-    private val _cartMovies = MutableLiveData<List<Movie>>()
-    val cartMovies: LiveData<List<Movie>> get() = _cartMovies
+
     fun addMovieToCart(
         name: String,
         image: String,
