@@ -1,4 +1,4 @@
-package com.oktaygenc.cinechoice.ui.presentation.register.screens
+package com.oktaygenc.cinechoice.ui.presentation.register.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

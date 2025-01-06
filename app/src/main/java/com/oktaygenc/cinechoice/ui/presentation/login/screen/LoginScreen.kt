@@ -1,4 +1,4 @@
-package com.oktaygenc.cinechoice.ui.presentation.login.screens
+package com.oktaygenc.cinechoice.ui.presentation.login.screen
 
 
 import androidx.compose.foundation.layout.Arrangement

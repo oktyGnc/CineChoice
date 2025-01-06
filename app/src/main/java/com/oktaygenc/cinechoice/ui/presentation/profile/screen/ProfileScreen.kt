@@ -1,4 +1,4 @@
-package com.oktaygenc.cinechoice.ui.presentation.profile.screens
+package com.oktaygenc.cinechoice.ui.presentation.profile.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -13,11 +13,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.oktaygenc.cinechoice.ui.presentation.movielist.components.BottomNavigationBar
 import com.oktaygenc.cinechoice.ui.presentation.profile.components.ProfileContent
 import com.oktaygenc.cinechoice.ui.presentation.profile.viewmodel.ProfileViewModel
 

@@ -1,4 +1,4 @@
-package com.oktaygenc.cinechoice.ui.navigation
+package com.oktaygenc.cinechoice.ui.navigation.navgraph
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -11,15 +11,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.google.gson.Gson
 import com.oktaygenc.cinechoice.data.model.Movie
-import com.oktaygenc.cinechoice.ui.presentation.cart.screens.CartScreen
-import com.oktaygenc.cinechoice.ui.presentation.detail.screens.DetailScreen
-import com.oktaygenc.cinechoice.ui.presentation.explore.screens.ExploreScreen
+import com.oktaygenc.cinechoice.ui.presentation.cart.screen.CartScreen
+import com.oktaygenc.cinechoice.ui.presentation.detail.screen.DetailScreen
+import com.oktaygenc.cinechoice.ui.presentation.explore.screen.ExploreScreen
 import com.oktaygenc.cinechoice.ui.presentation.favorite.FavoriteScreen
-import com.oktaygenc.cinechoice.ui.presentation.login.LoginScreen
-import com.oktaygenc.cinechoice.ui.presentation.movielist.screens.MovieListScreen
+import com.oktaygenc.cinechoice.ui.presentation.login.screen.LoginScreen
+import com.oktaygenc.cinechoice.ui.presentation.movielist.screen.MovieListScreen
 import com.oktaygenc.cinechoice.ui.presentation.movielist.viewmodel.MovieListScreenViewModel
-import com.oktaygenc.cinechoice.ui.presentation.profile.screens.ProfileScreen
-import com.oktaygenc.cinechoice.ui.presentation.register.RegisterScreen
+import com.oktaygenc.cinechoice.ui.presentation.onboarding.screen.OnboardingScreen
+import com.oktaygenc.cinechoice.ui.presentation.profile.screen.ProfileScreen
+import com.oktaygenc.cinechoice.ui.presentation.register.screen.RegisterScreen
 
 @Composable
 fun Navigation(
@@ -29,7 +30,7 @@ fun Navigation(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = "login"
+        startDestination = "register"
     ) {
         composable("home") {
             val viewModel: MovieListScreenViewModel = hiltViewModel()
@@ -44,13 +45,24 @@ fun Navigation(
                 onAction = viewModel::onAction
             )
         }
-        composable("login") { LoginScreen(onLoginSuccess = { navController.navigate("home") }) }
-        composable("register") { RegisterScreen(onRegisterSuccess = { navController.navigate("home") }) }
-        composable("explore") { ExploreScreen(navController)}
-
-
-        composable("favorite") { FavoriteScreen(navController) }
-        composable("profile") { ProfileScreen(navController) }
+        composable("onBoarding") {
+            OnboardingScreen { navController.navigate("home") }
+        }
+        composable("login") {
+            LoginScreen(onLoginSuccess = { navController.navigate("home") })
+        }
+        composable("register") {
+            RegisterScreen(onRegisterSuccess = { navController.navigate("onBoarding") })
+        }
+        composable("explore") {
+            ExploreScreen(navController)
+        }
+        composable("favorite") {
+            FavoriteScreen(navController)
+        }
+        composable("profile") {
+            ProfileScreen(navController)
+        }
         composable(
             "detail/{comingMovie}",
             arguments = listOf(navArgument("comingMovie") { type = NavType.StringType })
@@ -59,7 +71,6 @@ fun Navigation(
             val comingMovie = Gson().fromJson(json, Movie::class.java)
             DetailScreen(navController, comingMovie)
         }
-
         composable("cart") {
             CartScreen(navController)
         }

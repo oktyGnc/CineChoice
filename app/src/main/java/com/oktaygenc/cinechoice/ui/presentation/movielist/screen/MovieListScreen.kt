@@ -1,4 +1,4 @@
-package com.oktaygenc.cinechoice.ui.presentation.movielist.screens
+package com.oktaygenc.cinechoice.ui.presentation.movielist.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

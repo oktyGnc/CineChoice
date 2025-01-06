@@ -1,4 +1,4 @@
-package com.oktaygenc.cinechoice.ui.presentation.detail.screens
+package com.oktaygenc.cinechoice.ui.presentation.detail.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,8 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -33,7 +31,6 @@ import com.oktaygenc.cinechoice.data.model.Movie
 import com.oktaygenc.cinechoice.ui.presentation.detail.viewmodel.DetailScreenViewModel
 import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
 import com.oktaygenc.cinechoice.ui.theme.TopBarColor
-import com.oktaygenc.cinechoice.ui.theme.lobster
 import com.oktaygenc.cinechoice.ui.theme.oswald
 import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 
