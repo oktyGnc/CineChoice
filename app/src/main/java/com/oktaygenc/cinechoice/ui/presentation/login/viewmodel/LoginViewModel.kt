@@ -1,4 +1,4 @@
-package com.oktaygenc.cinechoice.ui.presentation.login
+package com.oktaygenc.cinechoice.ui.presentation.login.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

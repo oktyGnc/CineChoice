@@ -1,4 +1,4 @@
-package com.oktaygenc.cinechoice.ui.presentation.login
+package com.oktaygenc.cinechoice.ui.presentation.login.screens
 
 
 import androidx.compose.foundation.layout.Arrangement
@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.oktaygenc.cinechoice.ui.presentation.login.viewmodel.LoginViewModel
 import com.oktaygenc.cinechoice.utils.Resource
 
 @Composable
