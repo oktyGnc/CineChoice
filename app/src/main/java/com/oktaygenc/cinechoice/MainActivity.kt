@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.oktaygenc.cinechoice.ui.navigation.Navigation
+import com.oktaygenc.cinechoice.ui.navigation.navgraph.Navigation
+import com.oktaygenc.cinechoice.ui.navigation.screens.Screen
 import com.oktaygenc.cinechoice.ui.presentation.movielist.components.BottomNavigationBar
 import com.oktaygenc.cinechoice.ui.theme.CineChoiceTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +21,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
+            val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+
             CineChoiceTheme {
                 Scaffold(
                     content = {
@@ -30,7 +34,9 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                     bottomBar = {
-                        BottomNavigationBar(navController = navController)
+                        if (Screen.Screen.shouldShowBottomBar(currentRoute)) {
+                            BottomNavigationBar(navController = navController)
+                        }
                     }
                 )
             }
