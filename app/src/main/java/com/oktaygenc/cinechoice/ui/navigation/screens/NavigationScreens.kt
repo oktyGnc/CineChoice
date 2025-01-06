@@ -1,6 +1,6 @@
 package com.oktaygenc.cinechoice.ui.navigation.screens
 
-class Screen {
+class NavigationScreens {
     sealed class Screen(val route: String) {
         data object Home : Screen("home")
         data object Explore : Screen("explore")
