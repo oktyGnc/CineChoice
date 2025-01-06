@@ -1,16 +1,10 @@
 package com.oktaygenc.cinechoice.ui.presentation.detail.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.oktaygenc.cinechoice.data.model.CardItem
-import com.oktaygenc.cinechoice.data.model.Movie
 import com.oktaygenc.cinechoice.usecase.AddMovieToCartUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

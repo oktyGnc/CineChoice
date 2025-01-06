@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
-import com.oktaygenc.cinechoice.data.model.Movie
+import com.oktaygenc.cinechoice.data.model.entitiy.Movie
 import com.oktaygenc.cinechoice.ui.presentation.detail.viewmodel.DetailScreenViewModel
 import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
 import com.oktaygenc.cinechoice.ui.theme.TopBarColor

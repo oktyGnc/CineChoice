@@ -1,8 +1,8 @@
 package com.oktaygenc.cinechoice.retrofit
 
-import com.oktaygenc.cinechoice.data.model.AddDeleteResponse
-import com.oktaygenc.cinechoice.data.model.CartApiResponse
-import com.oktaygenc.cinechoice.data.model.MoviesApiResponse
+import com.oktaygenc.cinechoice.data.model.response.AddDeleteResponse
+import com.oktaygenc.cinechoice.data.model.response.CartApiResponse
+import com.oktaygenc.cinechoice.data.model.response.MoviesApiResponse
 import com.oktaygenc.cinechoice.utils.UserSessionManager
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

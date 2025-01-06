@@ -1,7 +1,7 @@
 package com.oktaygenc.cinechoice.di.repository
 
-import com.oktaygenc.cinechoice.data.datasource.MoviesDataSource
-import com.oktaygenc.cinechoice.data.repository.MovieRepository
+import com.oktaygenc.cinechoice.data.datasource.movies.MoviesDataSource
+import com.oktaygenc.cinechoice.data.repository.movie.MovieRepository
 import com.oktaygenc.cinechoice.retrofit.MovieApi
 import dagger.Module
 import dagger.Provides

@@ -1,7 +1,6 @@
 package com.oktaygenc.cinechoice.ui.presentation.movielist.state
 
-import com.oktaygenc.cinechoice.data.model.CardItem
-import com.oktaygenc.cinechoice.data.model.Movie
+import com.oktaygenc.cinechoice.data.model.entitiy.Movie
 
 
 data class MoviesState(

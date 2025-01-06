@@ -1,8 +1,8 @@
 package com.oktaygenc.cinechoice.di.auth
 
 import com.google.firebase.auth.FirebaseAuth
-import com.oktaygenc.cinechoice.data.datasource.AuthDataSource
-import com.oktaygenc.cinechoice.data.repository.AuthRepository
+import com.oktaygenc.cinechoice.data.datasource.auth.AuthDataSource
+import com.oktaygenc.cinechoice.data.repository.auth.AuthRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

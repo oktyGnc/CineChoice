@@ -1,4 +1,4 @@
-package com.oktaygenc.cinechoice.data.model
+package com.oktaygenc.cinechoice.data.model.entitiy
 
 data class CardItem(
     val cartId: Int,

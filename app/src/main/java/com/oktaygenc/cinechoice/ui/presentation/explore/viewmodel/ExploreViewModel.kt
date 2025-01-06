@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.oktaygenc.cinechoice.data.model.Movie
+import com.oktaygenc.cinechoice.data.model.entitiy.Movie
 import com.oktaygenc.cinechoice.usecase.GetAllMoviesUseCase
 import com.oktaygenc.cinechoice.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

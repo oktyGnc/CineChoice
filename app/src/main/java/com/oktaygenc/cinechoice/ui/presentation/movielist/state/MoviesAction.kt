@@ -1,6 +1,6 @@
 package com.oktaygenc.cinechoice.ui.presentation.movielist.state
 
-import com.oktaygenc.cinechoice.data.model.Movie
+import com.oktaygenc.cinechoice.data.model.entitiy.Movie
 
 sealed interface MoviesAction {
     data class OnCartClick(val movie: Movie) : MoviesAction

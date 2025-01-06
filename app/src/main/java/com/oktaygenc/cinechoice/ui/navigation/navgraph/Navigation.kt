@@ -10,7 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.google.gson.Gson
-import com.oktaygenc.cinechoice.data.model.Movie
+import com.oktaygenc.cinechoice.data.model.entitiy.Movie
 import com.oktaygenc.cinechoice.ui.presentation.cart.screen.CartScreen
 import com.oktaygenc.cinechoice.ui.presentation.detail.screen.DetailScreen
 import com.oktaygenc.cinechoice.ui.presentation.explore.screen.ExploreScreen

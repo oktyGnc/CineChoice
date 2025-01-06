@@ -37,7 +37,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import com.oktaygenc.cinechoice.data.model.Movie
+import com.oktaygenc.cinechoice.data.model.entitiy.Movie
 import com.oktaygenc.cinechoice.ui.theme.DeleteColor
 import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
 import com.oktaygenc.cinechoice.ui.theme.oswald

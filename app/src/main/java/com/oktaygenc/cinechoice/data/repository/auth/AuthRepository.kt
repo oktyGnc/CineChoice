@@ -1,8 +1,8 @@
-package com.oktaygenc.cinechoice.data.repository
+package com.oktaygenc.cinechoice.data.repository.auth
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import com.oktaygenc.cinechoice.data.datasource.AuthDataSource
+import com.oktaygenc.cinechoice.data.datasource.auth.AuthDataSource
 import com.oktaygenc.cinechoice.utils.Resource
 import com.oktaygenc.cinechoice.utils.UserSessionManager
 import kotlinx.coroutines.tasks.await

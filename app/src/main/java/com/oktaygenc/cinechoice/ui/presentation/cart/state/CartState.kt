@@ -1,7 +1,7 @@
 package com.oktaygenc.cinechoice.ui.presentation.cart.state
 
 
-import com.oktaygenc.cinechoice.data.model.CardItem
+import com.oktaygenc.cinechoice.data.model.entitiy.CardItem
 
 data class CartState(
     val cartMovies: List<CardItem> = emptyList(),  // Sepetteki filmler için boş liste

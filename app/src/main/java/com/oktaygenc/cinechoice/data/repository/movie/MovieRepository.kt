@@ -1,8 +1,8 @@
-package com.oktaygenc.cinechoice.data.repository
+package com.oktaygenc.cinechoice.data.repository.movie
 
-import com.oktaygenc.cinechoice.data.datasource.MoviesDataSource
-import com.oktaygenc.cinechoice.data.model.CardItem
-import com.oktaygenc.cinechoice.data.model.Movie
+import com.oktaygenc.cinechoice.data.datasource.movies.MoviesDataSource
+import com.oktaygenc.cinechoice.data.model.entitiy.CardItem
+import com.oktaygenc.cinechoice.data.model.entitiy.Movie
 import com.oktaygenc.cinechoice.utils.Resource
 import javax.inject.Inject
 

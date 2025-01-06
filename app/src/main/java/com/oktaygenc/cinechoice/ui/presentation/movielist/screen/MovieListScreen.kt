@@ -32,7 +32,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.oktaygenc.cinechoice.data.model.Movie
+import com.oktaygenc.cinechoice.data.model.entitiy.Movie
 import com.oktaygenc.cinechoice.ui.presentation.movielist.components.AutoSlidingPager
 import com.oktaygenc.cinechoice.ui.presentation.movielist.components.MovieCard
 import com.oktaygenc.cinechoice.ui.presentation.movielist.components.SingleSelectionButtons

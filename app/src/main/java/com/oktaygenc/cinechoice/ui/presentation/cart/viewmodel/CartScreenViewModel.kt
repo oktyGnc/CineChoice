@@ -5,13 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.oktaygenc.cinechoice.data.model.CardItem
+import com.oktaygenc.cinechoice.data.model.entitiy.CardItem
 import com.oktaygenc.cinechoice.usecase.AddMovieToCartUseCase
 import com.oktaygenc.cinechoice.usecase.DeleteMovieFromCartUseCase
 import com.oktaygenc.cinechoice.usecase.GetMoviesInCartUseCase
 import com.oktaygenc.cinechoice.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

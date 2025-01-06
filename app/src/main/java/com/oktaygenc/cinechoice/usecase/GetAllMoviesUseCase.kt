@@ -1,7 +1,7 @@
 package com.oktaygenc.cinechoice.usecase
 
-import com.oktaygenc.cinechoice.data.model.Movie
-import com.oktaygenc.cinechoice.data.repository.MovieRepository
+import com.oktaygenc.cinechoice.data.model.entitiy.Movie
+import com.oktaygenc.cinechoice.data.repository.movie.MovieRepository
 import com.oktaygenc.cinechoice.utils.Resource
 import javax.inject.Inject
 
