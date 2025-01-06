@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.oktaygenc.cinechoice.ui.navigation.navgraph.Navigation
-import com.oktaygenc.cinechoice.ui.navigation.screens.Screen
+import com.oktaygenc.cinechoice.ui.navigation.screens.NavigationScreens
 import com.oktaygenc.cinechoice.ui.presentation.movielist.components.BottomNavigationBar
 import com.oktaygenc.cinechoice.ui.theme.CineChoiceTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                     bottomBar = {
-                        if (Screen.Screen.shouldShowBottomBar(currentRoute)) {
+                        if (NavigationScreens.Screen.shouldShowBottomBar(currentRoute)) {
                             BottomNavigationBar(navController = navController)
                         }
                     }
