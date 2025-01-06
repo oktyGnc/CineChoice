@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "876270505818",
+    "project_id": "cinechoice-38",
+    "storage_bucket": "cinechoice-38.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876270505818:android:327658c03ca3038d22ed63",
+        "android_client_info": {
+          "package_name": "com.oktaygenc.cinechoice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAvgJ0XR9Fp18pn_htHHwX1VK8C-OA0_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

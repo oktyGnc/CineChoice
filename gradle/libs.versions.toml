@@ -24,6 +24,8 @@ navigationCompose = "2.8.5"
 retrofit = "2.11.0"
 runtimeLivedata = "1.7.6"
 ksp = "2.1.0-1.0.29"
+googleGmsGoogleServices = "4.4.2"
+firebaseAuth = "23.1.0"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityCompose" }
@@ -57,6 +59,7 @@ landscapist-glide = { module = "com.github.skydoves:landscapist-glide", version.
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -64,4 +67,5 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 hilt-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
 ksp-plugin = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 
