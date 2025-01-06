@@ -57,6 +57,8 @@ class MovieListScreenViewModel @Inject constructor(
                 }
 
                 is Resource.Error -> updateUiState { copy(error = resource.message, isLoading = false) }
+                Resource.Empty -> TODO()
+                Resource.Loading -> TODO()
             }
         }
     }
@@ -81,6 +83,8 @@ class MovieListScreenViewModel @Inject constructor(
             when (resource) {
                 is Resource.Success -> updateUiState { copy(successMessage = resource.data) }
                 is Resource.Error -> updateUiState { copy(error = resource.message) }
+                Resource.Empty -> TODO()
+                Resource.Loading -> TODO()
             }
         }
     }

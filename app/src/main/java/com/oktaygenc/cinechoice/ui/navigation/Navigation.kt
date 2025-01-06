@@ -15,9 +15,11 @@ import com.oktaygenc.cinechoice.ui.presentation.cart.screens.CartScreen
 import com.oktaygenc.cinechoice.ui.presentation.detail.screens.DetailScreen
 import com.oktaygenc.cinechoice.ui.presentation.explore.screens.ExploreScreen
 import com.oktaygenc.cinechoice.ui.presentation.favorite.FavoriteScreen
+import com.oktaygenc.cinechoice.ui.presentation.login.LoginScreen
 import com.oktaygenc.cinechoice.ui.presentation.movielist.screens.MovieListScreen
 import com.oktaygenc.cinechoice.ui.presentation.movielist.viewmodel.MovieListScreenViewModel
 import com.oktaygenc.cinechoice.ui.presentation.profile.screens.ProfileScreen
+import com.oktaygenc.cinechoice.ui.presentation.register.RegisterScreen
 
 @Composable
 fun Navigation(
@@ -27,7 +29,7 @@ fun Navigation(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = "home"
+        startDestination = "login"
     ) {
         composable("home") {
             val viewModel: MovieListScreenViewModel = hiltViewModel()
@@ -42,6 +44,8 @@ fun Navigation(
                 onAction = viewModel::onAction
             )
         }
+        composable("login") { LoginScreen(onLoginSuccess = { navController.navigate("home") }) }
+        composable("register") { RegisterScreen(onRegisterSuccess = { navController.navigate("home") }) }
         composable("explore") { ExploreScreen(navController)}
 
 

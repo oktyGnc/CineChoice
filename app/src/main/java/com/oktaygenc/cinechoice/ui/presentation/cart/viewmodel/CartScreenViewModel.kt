@@ -44,6 +44,9 @@ class CartScreenViewModel @Inject constructor(
                 is Resource.Error -> Log.e(
                     "CartViewModel", "Error getting movies in cart: ${resource.message}"
                 )
+
+                Resource.Empty -> TODO()
+                Resource.Loading -> TODO()
             }
             _isLoading.value = false
         }
@@ -62,6 +65,9 @@ class CartScreenViewModel @Inject constructor(
                     Log.e("CartViewModel", "Error deleting movie from cart: ${resource.message}")
                     getMoviesInCart()
                 }
+
+                Resource.Empty -> TODO()
+                Resource.Loading -> TODO()
             }
             _isLoading.value = false
         }

@@ -3,13 +3,13 @@ package com.oktaygenc.cinechoice.retrofit
 import com.oktaygenc.cinechoice.data.model.AddDeleteResponse
 import com.oktaygenc.cinechoice.data.model.CartApiResponse
 import com.oktaygenc.cinechoice.data.model.MoviesApiResponse
+import com.oktaygenc.cinechoice.utils.UserSessionManager
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface MovieApi {
-
     // Tüm Filmleri Getir
     @GET("movies/getAllMovies.php")
     suspend fun getAllMovies(): MoviesApiResponse
@@ -18,7 +18,7 @@ interface MovieApi {
     @POST("movies/getMovieCart.php")
     @FormUrlEncoded
     suspend fun getMoviesInCart(
-        @Field("userName") userName: String = "oktaygenc"
+        @Field("userName") userName: String = UserSessionManager.getCurrentUser()
     ): CartApiResponse
 
     // Sepete Film Ekle
@@ -34,7 +34,7 @@ interface MovieApi {
         @Field("director") director: String,
         @Field("description") description: String,
         @Field("orderAmount") orderAmount: Int,
-        @Field("userName") userName: String = "oktaygenc"
+        @Field("userName") userName: String = UserSessionManager.getCurrentUser()
     ): AddDeleteResponse
 
     // Sepetten Film Sil
@@ -42,6 +42,6 @@ interface MovieApi {
     @FormUrlEncoded
     suspend fun deleteMovieFromCart(
         @Field("cartId") cartId: Int,
-        @Field("userName") userName: String = "oktaygenc"
+        @Field("userName") userName: String = UserSessionManager.getCurrentUser()
     ): AddDeleteResponse
 }

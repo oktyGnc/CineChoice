@@ -33,6 +33,8 @@ class ExploreViewModel @Inject constructor(
             when (val movieList = getAllMoviesUseCase()) {
                 is Resource.Success -> _movies.value = movieList.data
                 is Resource.Error -> _movies.value = emptyList()
+                Resource.Empty -> TODO()
+                Resource.Loading -> TODO()
             }
         }
     }

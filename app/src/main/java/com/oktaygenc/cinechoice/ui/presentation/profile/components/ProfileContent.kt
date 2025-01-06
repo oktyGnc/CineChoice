@@ -24,9 +24,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.oktaygenc.cinechoice.R
+import com.oktaygenc.cinechoice.ui.presentation.profile.viewmodel.ProfileViewModel
 
 @Composable
-fun ProfileContent(isDarkTheme: Boolean, onThemeChange: (Boolean) -> Unit) {
+fun ProfileContent(
+    isDarkTheme: Boolean,
+    onThemeChange: (Boolean) -> Unit,
+    viewModel: ProfileViewModel,
+    onLogoutSuccess: () -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -42,8 +48,9 @@ fun ProfileContent(isDarkTheme: Boolean, onThemeChange: (Boolean) -> Unit) {
                 .padding(2.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground), // Profil fotoğrafını buraya ekleyebilirsiniz
-                contentDescription = "Profile Picture", modifier = Modifier.fillMaxSize()
+                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                contentDescription = "Profile Picture",
+                modifier = Modifier.fillMaxSize()
             )
         }
 
@@ -51,13 +58,15 @@ fun ProfileContent(isDarkTheme: Boolean, onThemeChange: (Boolean) -> Unit) {
 
         // Kullanıcı Adı
         Text(
-            text = "Oktay Genç", style = MaterialTheme.typography.h5, fontWeight = FontWeight.Bold
+            text = viewModel.getUserName(),
+            style = MaterialTheme.typography.h5,
+            fontWeight = FontWeight.Bold
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
         // E-posta
-        ProfileDetail(label = "Email", value = "oktaygenc@gmail.com")
+        ProfileDetail(label = "Email", value = viewModel.getUserEmail())
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -75,7 +84,7 @@ fun ProfileContent(isDarkTheme: Boolean, onThemeChange: (Boolean) -> Unit) {
 
         // Çıkış Butonu
         Button(
-            onClick = { /* Çıkış işlemi yapılacak */ }, modifier = Modifier.fillMaxWidth()
+            onClick = { viewModel.logout(onLogoutSuccess) }, modifier = Modifier.fillMaxWidth()
         ) {
             Text("Log Out")
         }
