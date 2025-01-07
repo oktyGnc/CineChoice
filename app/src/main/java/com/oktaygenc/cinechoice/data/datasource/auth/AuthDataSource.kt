@@ -12,13 +12,6 @@ class AuthDataSource @Inject constructor(
         private const val TAG = "AuthDataSource"
     }
 
-    fun getCurrentUser(): FirebaseUser? {
-        Log.d(TAG, "Getting current user")
-        val user = firebaseAuth.currentUser
-        Log.d(TAG, "Current user: ${user?.uid ?: "null"}")
-        return user
-    }
-
     fun signInWithEmailPassword(email: String, password: String) =
         firebaseAuth.signInWithEmailAndPassword(email, password).also {
             Log.d(TAG, "Sign in request sent")

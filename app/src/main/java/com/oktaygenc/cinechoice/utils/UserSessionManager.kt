@@ -18,7 +18,7 @@ object UserSessionManager {
     }
 
     fun getCurrentUser(): String {
-        return currentUserEmail ?: getUserName()  // Burada getUserName() fonksiyonunu çağırıyoruz
+        return currentUserEmail ?: getUserName()
     }
 
     fun clearCurrentUser() {

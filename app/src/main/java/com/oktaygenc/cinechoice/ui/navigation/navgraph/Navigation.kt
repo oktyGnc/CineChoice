@@ -14,14 +14,13 @@ import com.oktaygenc.cinechoice.data.model.entitiy.Movie
 import com.oktaygenc.cinechoice.ui.presentation.cart.screen.CartScreen
 import com.oktaygenc.cinechoice.ui.presentation.detail.screen.DetailScreen
 import com.oktaygenc.cinechoice.ui.presentation.explore.screen.ExploreScreen
-import com.oktaygenc.cinechoice.ui.presentation.favorite.FavoriteScreen
+import com.oktaygenc.cinechoice.ui.presentation.favorite.screens.FavoriteScreen
 import com.oktaygenc.cinechoice.ui.presentation.login.screen.LoginScreen
 import com.oktaygenc.cinechoice.ui.presentation.movielist.screen.MovieListScreen
 import com.oktaygenc.cinechoice.ui.presentation.movielist.viewmodel.MovieListScreenViewModel
 import com.oktaygenc.cinechoice.ui.presentation.onboarding.screen.OnboardingScreen
 import com.oktaygenc.cinechoice.ui.presentation.profile.screen.ProfileScreen
 import com.oktaygenc.cinechoice.ui.presentation.register.screen.RegisterScreen
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @Composable
 fun Navigation(
