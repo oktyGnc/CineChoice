@@ -21,16 +21,18 @@ import com.oktaygenc.cinechoice.ui.presentation.movielist.viewmodel.MovieListScr
 import com.oktaygenc.cinechoice.ui.presentation.onboarding.screen.OnboardingScreen
 import com.oktaygenc.cinechoice.ui.presentation.profile.screen.ProfileScreen
 import com.oktaygenc.cinechoice.ui.presentation.register.screen.RegisterScreen
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 @Composable
 fun Navigation(
     modifier: Modifier = Modifier,
-    navController: NavHostController
+    navController: NavHostController,
+    startDestination: String
 ) {
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = "register"
+        startDestination = startDestination
     ) {
         composable("home") {
             val viewModel: MovieListScreenViewModel = hiltViewModel()
