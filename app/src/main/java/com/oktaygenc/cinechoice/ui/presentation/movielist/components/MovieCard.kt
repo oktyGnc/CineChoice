@@ -49,7 +49,6 @@ fun MovieCard(
     movie: Movie,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
-    onFavoriteClick: () -> Unit = {},
     onAddToCartClick: () -> Unit = {},
 ) {
     var isFavorite by remember { mutableStateOf(false) }
@@ -84,19 +83,6 @@ fun MovieCard(
                 )
             }
 
-            IconButton(
-                onClick = {
-                    isFavorite = !isFavorite
-                    onFavoriteClick()
-                }, modifier = Modifier.align(Alignment.TopStart)
-            ) {
-                Icon(
-                    imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                    contentDescription = "Favorite",
-                    tint = if (isFavorite) SelectedButtonColor else Color.White,
-                    modifier = Modifier.size(28.dp)
-                )
-            }
         }
 
         Column(
