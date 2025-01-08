@@ -27,6 +27,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.oktaygenc.cinechoice.ui.presentation.favorite.components.FavoriteCard
 import com.oktaygenc.cinechoice.ui.presentation.favorite.viewmodel.FavoriteViewModel
+import kotlinx.coroutines.delay
 
 @Composable
 fun FavoriteScreen(
@@ -36,6 +37,7 @@ fun FavoriteScreen(
     var isLoading by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
+        delay(1000)
         viewModel.loadFavorites()
         isLoading = false
     }
@@ -80,10 +82,7 @@ fun FavoriteScreen(
                     items(favoriteMovies.value) { movie ->
                         FavoriteCard(
                             movie = movie,
-                            onRemoveClick = { viewModel.removeFavoriteMovie(movie.id) },
-                            onMovieClick = {
-                                navController.navigate("movieDetail/${movie.id}")
-                            }
+                            onRemoveClick = { viewModel.removeFavoriteMovie(movie.id) }
                         )
                     }
                 }

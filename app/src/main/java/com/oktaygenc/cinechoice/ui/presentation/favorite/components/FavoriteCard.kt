@@ -21,19 +21,19 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.oktaygenc.cinechoice.data.model.entitiy.Movie
+import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
 import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 
 @Composable
 fun FavoriteCard(
     movie: Movie,
     onRemoveClick: () -> Unit,
-    onMovieClick: () -> Unit,
 ) {
     Card(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
-            .clickable(onClick = onMovieClick)
+
     ) {
         Column {
             Box {
@@ -52,7 +52,7 @@ fun FavoriteCard(
                     Icon(
                         imageVector = Icons.Default.Delete,
                         contentDescription = "Remove from favorites",
-                        tint = MaterialTheme.colorScheme.error
+                        tint = SelectedButtonColor
                     )
                 }
             }

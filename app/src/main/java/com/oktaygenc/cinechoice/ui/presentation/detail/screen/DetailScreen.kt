@@ -34,6 +34,7 @@ import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.oktaygenc.cinechoice.data.model.entitiy.Movie
 import com.oktaygenc.cinechoice.ui.presentation.detail.viewmodel.DetailScreenViewModel
+import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
 import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
 import com.oktaygenc.cinechoice.ui.theme.TopBarColor
 import com.oktaygenc.cinechoice.ui.theme.oswald
@@ -71,7 +72,7 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
                         Icon(
                             imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
                             contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites",
-                            tint = if (isFavorite) Color.Red else TopBarColor
+                            tint = if (isFavorite) SelectedButtonColor else TopBarColor
                         )
                     }
                 }
