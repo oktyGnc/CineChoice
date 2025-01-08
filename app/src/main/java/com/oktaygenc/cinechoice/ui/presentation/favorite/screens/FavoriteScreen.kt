@@ -29,6 +29,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.oktaygenc.cinechoice.ui.presentation.favorite.components.FavoriteCard
 import com.oktaygenc.cinechoice.ui.presentation.favorite.viewmodel.FavoriteViewModel
+import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
 import kotlinx.coroutines.delay
 
 @Composable
@@ -39,7 +40,7 @@ fun FavoriteScreen(
     var isLoading by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
-        delay(1000)
+        delay(2000)
         viewModel.loadFavorites()
         isLoading = false
     }
@@ -54,6 +55,7 @@ fun FavoriteScreen(
         ) {
             if (isLoading) {
                 CircularProgressIndicator(
+                    color = SelectedButtonColor,
                     modifier = Modifier.align(Alignment.Center)
                 )
             } else if (favoriteMovies.value.isEmpty()) {

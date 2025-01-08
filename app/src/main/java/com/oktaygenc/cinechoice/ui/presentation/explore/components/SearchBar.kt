@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.oktaygenc.cinechoice.ui.presentation.explore.viewmodel.ExploreViewModel
+import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
 import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
 import com.oktaygenc.cinechoice.ui.theme.TopBarColor
 import com.oktaygenc.cinechoice.ui.theme.oswald
@@ -48,7 +49,7 @@ fun SearchBar(
         textStyle = MaterialTheme.typography.body1,
         shape = RoundedCornerShape(20.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = TopAndBottomBarColor,
+            focusedBorderColor = SelectedButtonColor,
             unfocusedBorderColor = MaterialTheme.colors.onSurface.copy(alpha = 0.3f),
             backgroundColor = MaterialTheme.colors.surface
         )

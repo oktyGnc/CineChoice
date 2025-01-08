@@ -13,18 +13,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonColors
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Switch
+import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.oktaygenc.cinechoice.R
 import com.oktaygenc.cinechoice.ui.presentation.profile.viewmodel.ProfileViewModel
+import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
+import com.oktaygenc.cinechoice.ui.theme.TextSelectedButtonColor
 
 @Composable
 fun ProfileContent(
@@ -39,16 +46,15 @@ fun ProfileContent(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Profil Fotoğrafı
         Box(
             modifier = Modifier
                 .size(120.dp)
                 .clip(CircleShape)
-                .border(2.dp, MaterialTheme.colors.primary, CircleShape)
+                .border(2.dp, SelectedButtonColor, CircleShape)
                 .padding(2.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                painter = painterResource(id = R.drawable.nonamefoto),
                 contentDescription = "Profile Picture",
                 modifier = Modifier.fillMaxSize()
             )
@@ -56,7 +62,6 @@ fun ProfileContent(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Kullanıcı Adı
         Text(
             text = viewModel.getUserName(),
             style = MaterialTheme.typography.h5,
@@ -65,28 +70,40 @@ fun ProfileContent(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // E-posta
-        ProfileDetail(label = "Email", value = viewModel.getUserEmail())
+        ProfileDetail(
+            label = "Email",
+            value = viewModel.getUserEmail(),
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Dark theme seçeneği
         Row(
             verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Dark Theme", modifier = Modifier.weight(1f))
+            Text("Dark Theme", modifier = Modifier.weight(1f), fontWeight = FontWeight.Bold)
             Switch(
-                checked = isDarkTheme, onCheckedChange = onThemeChange
+                checked = isDarkTheme,
+                onCheckedChange = onThemeChange,
+                colors = SwitchDefaults.colors(
+                    checkedThumbColor = SelectedButtonColor,
+                    uncheckedThumbColor = Color.Gray,
+                    checkedTrackColor = SelectedButtonColor.copy(alpha = 0.3f),
+                    uncheckedTrackColor = Color.LightGray
+                )
             )
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Çıkış Butonu
         Button(
-            onClick = { viewModel.logout(onLogoutSuccess) }, modifier = Modifier.fillMaxWidth()
+            onClick = { viewModel.logout(onLogoutSuccess) },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                contentColor = TextSelectedButtonColor,
+                backgroundColor = SelectedButtonColor
+            )
         ) {
-            Text("Log Out")
+            Text("Log Out", fontWeight = FontWeight.Bold, fontSize = 16.sp)
         }
     }
 }
