@@ -50,7 +50,7 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
         },
             colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor),
             navigationIcon = {
-                IconButton(onClick = { navController.popBackStack() }) {
+                IconButton(onClick = { viewModel.addToFavorites(comingMovie) }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Back",

@@ -15,6 +15,7 @@ import com.oktaygenc.cinechoice.ui.presentation.cart.screen.CartScreen
 import com.oktaygenc.cinechoice.ui.presentation.detail.screen.DetailScreen
 import com.oktaygenc.cinechoice.ui.presentation.explore.screen.ExploreScreen
 import com.oktaygenc.cinechoice.ui.presentation.favorite.screens.FavoriteScreen
+import com.oktaygenc.cinechoice.ui.presentation.favorite.viewmodel.FavoriteViewModel
 import com.oktaygenc.cinechoice.ui.presentation.login.screen.LoginScreen
 import com.oktaygenc.cinechoice.ui.presentation.movielist.screen.MovieListScreen
 import com.oktaygenc.cinechoice.ui.presentation.movielist.viewmodel.MovieListScreenViewModel
@@ -59,7 +60,11 @@ fun Navigation(
             ExploreScreen(navController)
         }
         composable("favorite") {
-            FavoriteScreen(navController)
+            val viewModel: FavoriteViewModel = hiltViewModel()
+            FavoriteScreen(
+                navController = navController,
+                viewModel = viewModel
+            )
         }
         composable("profile") {
             ProfileScreen(navController)
