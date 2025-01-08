@@ -40,23 +40,25 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
 
     val viewModel: DetailScreenViewModel = hiltViewModel()
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(text = comingMovie.name, color = TopBarColor, fontFamily = oswald) },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor),
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
-                            tint = TopBarColor
-                        )
-                    }
-                }
+    Scaffold(topBar = {
+        TopAppBar(title = {
+            Text(
+                text = comingMovie.name,
+                color = TopBarColor,
+                fontFamily = oswald
             )
-        }
-    ) { paddingValues ->
+        },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor),
+            navigationIcon = {
+                IconButton(onClick = { navController.popBackStack() }) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back",
+                        tint = TopBarColor
+                    )
+                }
+            })
+    }) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()

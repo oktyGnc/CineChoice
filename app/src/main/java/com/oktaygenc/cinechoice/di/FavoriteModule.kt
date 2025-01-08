@@ -3,6 +3,7 @@ package com.oktaygenc.cinechoice.di
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.oktaygenc.cinechoice.data.datasource.FavoriteDataSource
+import com.oktaygenc.cinechoice.data.datasource.auth.AuthDataSource
 import com.oktaygenc.cinechoice.data.repository.FavoriteRepository
 import dagger.Module
 import dagger.Provides
@@ -16,21 +17,22 @@ object FavoriteModule {
 
     @Provides
     @Singleton
-    fun provideFavoriteRepository(favoriteDataSource: FavoriteDataSource): FavoriteRepository {
-        return FavoriteRepository(favoriteDataSource)
+    fun provideFirestore(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
     }
 
     @Provides
     @Singleton
-    fun provideFavoriteDataSource(favoriteDataSource: FavoriteDataSource): FavoriteDataSource {
-        return favoriteDataSource
+    fun provideFavoriteRepository(
+        favoriteDataSource: FavoriteDataSource,
+        authDataSource: AuthDataSource,
+    ): FavoriteRepository {
+        return FavoriteRepository(favoriteDataSource, authDataSource)
     }
 
     @Provides
     @Singleton
-    fun provideFirebaseCollection(): CollectionReference {
-        return FirebaseFirestore.getInstance().collection("users")
-
+    fun provideFavoriteDataSource(firestore: FirebaseFirestore): FavoriteDataSource {
+        return FavoriteDataSource(firestore)
     }
-
 }

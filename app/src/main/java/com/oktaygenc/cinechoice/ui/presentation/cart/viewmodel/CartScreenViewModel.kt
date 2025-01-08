@@ -53,8 +53,8 @@ class CartScreenViewModel @Inject constructor(
 
     fun deleteMovieFromCart(cartId: Int) {
         viewModelScope.launch {
-            _isLoading.value = true
             _cartMovies.value = cartMovies.value?.filter { it.cartId != cartId }
+            _isLoading.value = true
             when (val resource = deleteMovieFromCartUseCase.invoke(cartId)) {
                 is Resource.Success -> {
                     getMoviesInCart()
@@ -62,7 +62,6 @@ class CartScreenViewModel @Inject constructor(
 
                 is Resource.Error -> {
                     Log.e("CartViewModel", "Error deleting movie from cart: ${resource.message}")
-                    getMoviesInCart()
                 }
 
                 Resource.Empty -> TODO()
@@ -85,13 +84,29 @@ class CartScreenViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             _isLoading.value = true
-            try {
-                addMovieToCartUseCase.invoke(
-                    name, image, price, category, rating, year, director, description, orderAmount
+            when (
+                val resource = addMovieToCartUseCase.invoke(
+                    name,
+                    image,
+                    price,
+                    category,
+                    rating,
+                    year,
+                    director,
+                    description,
+                    orderAmount
                 )
-                getMoviesInCart() // Listeyi güncelle
-            } catch (e: Exception) {
-                Log.e("CartViewModel", "Error adding movie: ${e.message}")
+            ) {
+                is Resource.Success -> {
+                    getMoviesInCart()
+                }
+
+                is Resource.Error -> {
+                    Log.e("CartViewModel", "Error deleting movie from cart: ${resource.message}")
+                }
+
+                Resource.Empty -> TODO()
+                Resource.Loading -> TODO()
             }
             _isLoading.value = false
         }

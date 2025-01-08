@@ -21,4 +21,6 @@ class AuthDataSource @Inject constructor(
         firebaseAuth.createUserWithEmailAndPassword(email, password).also {
             Log.d(TAG, "Create user request sent")
         }
+
+    fun getUserId(): String = firebaseAuth.currentUser?.uid.orEmpty()
 }

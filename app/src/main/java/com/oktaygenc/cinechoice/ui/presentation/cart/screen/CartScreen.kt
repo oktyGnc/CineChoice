@@ -1,6 +1,7 @@
 package com.oktaygenc.cinechoice.ui.presentation.cart.screen
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -51,7 +52,7 @@ fun CartScreen(navController: NavHostController) {
                 title = {
                     Text(text = "Your Cart", fontFamily = oswald)
                 }, colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor),
-                        navigationIcon = {
+                navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -65,70 +66,70 @@ fun CartScreen(navController: NavHostController) {
         }, containerColor = Color.White
 
     ) { paddingValues ->
-        if (isLoading) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                CircularProgressIndicator()
-            }
-        } else if (cartMovies.isEmpty()) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "No items in your cart.")
-            }
-        } else {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-            ) {
-                LazyColumn(
+        Box {
+            if (cartMovies.isEmpty() && !isLoading) {
+                Column(
                     modifier = Modifier
-                        .weight(1f)
                         .fillMaxSize()
+                        .padding(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    items(cartMovies) { movie ->
-                        MovieItem(cartMovies = movie,
-                            onRemoveClick = { movieId -> viewModel.deleteMovieFromCart(movieId) },
-                            onDecreaseClick = { movieId -> viewModel.deleteMovieFromCart(movieId) },
-                            onIncreaseClick = {
-                                viewModel.addMovieToCart(
-                                    name = movie.name,
-                                    image = movie.image,
-                                    price = movie.price,
-                                    category = movie.category,
-                                    rating = movie.rating,
-                                    year = movie.year,
-                                    director = movie.director,
-                                    description = movie.description,
-                                    orderAmount = movie.orderAmount
-                                )
-                            })
+                    Text(text = "No items in your cart.")
+                }
+            } else {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                ) {
+                    LazyColumn(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxSize()
+                    ) {
+                        items(cartMovies) { movie ->
+                            MovieItem(cartMovies = movie,
+                                onRemoveClick = { movieId -> viewModel.deleteMovieFromCart(movieId) },
+                                onDecreaseClick = { movieId -> viewModel.deleteMovieFromCart(movieId) },
+                                onIncreaseClick = {
+                                    viewModel.addMovieToCart(
+                                        name = movie.name,
+                                        image = movie.image,
+                                        price = movie.price,
+                                        category = movie.category,
+                                        rating = movie.rating,
+                                        year = movie.year,
+                                        director = movie.director,
+                                        description = movie.description,
+                                        orderAmount = movie.orderAmount
+                                    )
+                                })
+                        }
+                    }
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(text = "Total Amount:", style = MaterialTheme.typography.titleMedium)
+                        Text(text = "$$totalAmount", style = MaterialTheme.typography.titleMedium)
                     }
                 }
+            }
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+            if (isLoading) {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    Text(text = "Total Amount:", style = MaterialTheme.typography.titleMedium)
-                    Text(text = "$$totalAmount", style = MaterialTheme.typography.titleMedium)
+                    CircularProgressIndicator()
                 }
             }
         }
     }
 }
-
-
-
-
