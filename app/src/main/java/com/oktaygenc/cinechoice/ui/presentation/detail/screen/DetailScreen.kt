@@ -11,6 +11,8 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -19,12 +21,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.oktaygenc.cinechoice.data.model.entitiy.Movie
@@ -37,28 +42,42 @@ import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
-
     val viewModel: DetailScreenViewModel = hiltViewModel()
+    val isFavorite by viewModel.isFavorite.collectAsStateWithLifecycle()
 
-    Scaffold(topBar = {
-        TopAppBar(title = {
-            Text(
-                text = comingMovie.name,
-                color = TopBarColor,
-                fontFamily = oswald
-            )
-        },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor),
-            navigationIcon = {
-                IconButton(onClick = { viewModel.addToFavorites(comingMovie) }) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back",
-                        tint = TopBarColor
-                    )
+    LaunchedEffect(comingMovie.id) {
+        viewModel.checkFavoriteMovie(comingMovie.id)
+    }
+
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = comingMovie.name, color = TopBarColor, fontFamily = oswald)
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor),
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back",
+                            tint = TopBarColor
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = { viewModel.toggleFavorite(comingMovie) }) {
+                        Icon(
+                            imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                            contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites",
+                            tint = if (isFavorite) Color.Red else TopBarColor
+                        )
+                    }
                 }
-            })
-    }) { paddingValues ->
+            )
+        }
+    ) {paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
