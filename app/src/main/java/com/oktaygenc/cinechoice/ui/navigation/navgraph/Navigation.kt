@@ -22,6 +22,7 @@ import com.oktaygenc.cinechoice.ui.presentation.movielist.viewmodel.MovieListScr
 import com.oktaygenc.cinechoice.ui.presentation.onboarding.screen.OnboardingScreen
 import com.oktaygenc.cinechoice.ui.presentation.profile.screen.ProfileScreen
 import com.oktaygenc.cinechoice.ui.presentation.register.screen.RegisterScreen
+import com.oktaygenc.cinechoice.ui.presentation.splash.SplashScreen
 
 @Composable
 fun Navigation(
@@ -46,6 +47,9 @@ fun Navigation(
                 },
                 onAction = viewModel::onAction
             )
+        }
+        composable("splash") {
+            SplashScreen(navController)
         }
         composable("onBoarding") {
             OnboardingScreen { navController.navigate("home") }

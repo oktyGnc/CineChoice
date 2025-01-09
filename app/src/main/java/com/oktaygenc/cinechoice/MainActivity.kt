@@ -24,10 +24,6 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
-            // Firebase Authentication ile kullanıcı oturum durumunu kontrol et
-            val firebaseAuth = FirebaseAuth.getInstance()
-            val startDestination = if (firebaseAuth.currentUser != null) "home" else "login"
-
             CineChoiceTheme {
                 Scaffold(
                     content = {
@@ -36,7 +32,7 @@ class MainActivity : ComponentActivity() {
                                 .fillMaxSize()
                                 .padding(it),
                             navController = navController,
-                            startDestination = startDestination
+                            startDestination = "splash"
                         )
                     },
                     bottomBar = {

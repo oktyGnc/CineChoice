@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -30,6 +31,7 @@ import androidx.navigation.NavHostController
 import com.oktaygenc.cinechoice.ui.presentation.favorite.components.FavoriteCard
 import com.oktaygenc.cinechoice.ui.presentation.favorite.viewmodel.FavoriteViewModel
 import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
+import com.oktaygenc.cinechoice.ui.theme.TextSelectedButtonColor
 import kotlinx.coroutines.delay
 
 @Composable
@@ -67,14 +69,17 @@ fun FavoriteScreen(
                     verticalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        text = "Henüz favori film eklenmemiş",
+                        text = "No favorite movie added yet",
                         style = MaterialTheme.typography.bodyLarge
                     )
                     Button(
                         onClick = { navController.navigate("home") },
-                        modifier = Modifier.padding(top = 8.dp)
+                        modifier = Modifier.padding(top = 8.dp), colors = ButtonDefaults.buttonColors(
+                            containerColor = SelectedButtonColor,
+                            contentColor = TextSelectedButtonColor
+                        )
                     ) {
-                        Text("Filmleri Keşfet")
+                        Text("Discover Movies")
                     }
                 }
             } else {
