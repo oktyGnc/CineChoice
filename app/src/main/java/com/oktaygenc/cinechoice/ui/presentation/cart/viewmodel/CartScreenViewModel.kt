@@ -28,11 +28,8 @@ class CartScreenViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
 
-
-
-
     init {
-        getMoviesInCart() // Varsayılan kullanıcı
+        getMoviesInCart()
     }
 
     fun getMoviesInCart() {
@@ -43,9 +40,7 @@ class CartScreenViewModel @Inject constructor(
                 is Resource.Error -> Log.e(
                     "CartViewModel", "Error getting movies in cart: ${resource.message}"
                 )
-
-                Resource.Empty -> TODO()
-                Resource.Loading -> TODO()
+                else -> Unit
             }
             _isLoading.value = false
         }
@@ -53,19 +48,12 @@ class CartScreenViewModel @Inject constructor(
 
     fun deleteMovieFromCart(cartId: Int) {
         viewModelScope.launch {
-            _cartMovies.value = cartMovies.value?.filter { it.cartId != cartId }
+            _cartMovies.value = _cartMovies.value?.filter { it.cartId != cartId }
             _isLoading.value = true
             when (val resource = deleteMovieFromCartUseCase.invoke(cartId)) {
-                is Resource.Success -> {
-                    getMoviesInCart()
-                }
-
-                is Resource.Error -> {
-                    Log.e("CartViewModel", "Error deleting movie from cart: ${resource.message}")
-                }
-
-                Resource.Empty -> TODO()
-                Resource.Loading -> TODO()
+                is Resource.Success -> getMoviesInCart()
+                is Resource.Error -> Log.e("CartViewModel", "Error deleting movie from cart: ${resource.message}")
+                else -> Unit
             }
             _isLoading.value = false
         }
@@ -86,33 +74,17 @@ class CartScreenViewModel @Inject constructor(
             _isLoading.value = true
             when (
                 val resource = addMovieToCartUseCase.invoke(
-                    name,
-                    image,
-                    price,
-                    category,
-                    rating,
-                    year,
-                    director,
-                    description,
-                    orderAmount
+                    name, image, price, category, rating, year,
+                    director, description, orderAmount
                 )
             ) {
-                is Resource.Success -> {
-                    getMoviesInCart()
-                }
-
-                is Resource.Error -> {
-                    Log.e("CartViewModel", "Error deleting movie from cart: ${resource.message}")
-                }
-
-                Resource.Empty -> TODO()
-                Resource.Loading -> TODO()
+                is Resource.Success -> getMoviesInCart()
+                is Resource.Error -> Log.e("CartViewModel", "Error adding movie to cart: ${resource.message}")
+                else -> Unit
             }
             _isLoading.value = false
         }
     }
-
-
 }
 
 

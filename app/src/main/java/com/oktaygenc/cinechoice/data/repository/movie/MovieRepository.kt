@@ -61,17 +61,15 @@ class MovieRepository @Inject constructor(
         return try {
             val response = moviesDataSource.getMoviesInCart()
 
-            val filmCounts = response.cartItems.groupingBy { it.name }.eachCount()
-            val mappedFilms = mutableListOf<CardItem>()
-
-            filmCounts.keys.forEach { filmName ->
-                val item = response.cartItems.find { it.name == filmName }
-                item?.let {
-                    mappedFilms.add(it.copy(orderAmount = filmCounts[filmName] ?: 0))
-                }
+            // Aynı isimdeki filmlerin orderAmount'larını topla
+            val groupedFilms = response.cartItems.groupBy { it.name }
+            val mergedFilms = groupedFilms.map { (_, films) ->
+                val firstFilm = films.first()
+                val totalAmount = films.sumOf { it.orderAmount }
+                firstFilm.copy(orderAmount = totalAmount)
             }
 
-            Resource.Success(mappedFilms)
+            Resource.Success(mergedFilms)
         } catch (e: Exception) {
             Resource.Error(e.message.toString())
         }

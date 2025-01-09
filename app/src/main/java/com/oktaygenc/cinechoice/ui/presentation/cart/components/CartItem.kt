@@ -1,5 +1,6 @@
 package com.oktaygenc.cinechoice.ui.presentation.cart.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,9 +31,8 @@ import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 fun MovieItem(
     cartMovies: CardItem,
     onRemoveClick: (Int) -> Unit,
-    onIncreaseClick: (Int) -> Unit,
-    onDecreaseClick: (Int) -> Unit,
 ) {
+    Log.d("MovieItemddebug", "OrderAmount for ${cartMovies.name}: ${cartMovies.orderAmount}")
     Card(
         modifier = Modifier
             .padding(8.dp)
@@ -69,42 +69,21 @@ fun MovieItem(
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.Black
                 )
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(top = 8.dp)
-                ) {
-                    if (cartMovies.orderAmount > 1) {
-                        IconButton(onClick = { onDecreaseClick(cartMovies.cartId) }) {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_decrease),
-                                contentDescription = "Decrease",
-                                tint = Color.Black
-                            )
-                        }
-                    } else {
-                        IconButton(onClick = { onRemoveClick(cartMovies.cartId) }) {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_delete),
-                                contentDescription = "Delete",
-                                tint = Color.Black
-                            )
-                        }
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = cartMovies.orderAmount.toString(),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = Color.Gray
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    IconButton(onClick = { onIncreaseClick(cartMovies.cartId) }) {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_increase),
-                            contentDescription = "Increase",
-                            tint = Color.Black
-                        )
-                    }
-                }
+                Text(
+                    text = "Order Amount: ${cartMovies.orderAmount}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.Black
+                )
+            }
+            IconButton(
+                onClick = { onRemoveClick(cartMovies.cartId) },
+                modifier = Modifier.align(Alignment.CenterVertically)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_delete),
+                    contentDescription = "Remove",
+                    tint = Color.Red
+                )
             }
         }
     }

@@ -11,6 +11,7 @@ class NavigationScreens {
         data object Register : Screen("register")
         data object OnBoarding : Screen("onBoarding")
         data object Detail : Screen("detail/{comingMovie}")
+        data object Splash : Screen("splash")
 
         companion object {
             fun shouldShowBottomBar(route: String?): Boolean {

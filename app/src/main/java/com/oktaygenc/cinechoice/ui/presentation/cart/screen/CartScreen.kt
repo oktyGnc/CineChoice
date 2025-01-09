@@ -21,9 +21,13 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,9 +36,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.oktaygenc.cinechoice.ui.presentation.cart.components.MovieItem
 import com.oktaygenc.cinechoice.ui.presentation.cart.viewmodel.CartScreenViewModel
+import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
 import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
 import com.oktaygenc.cinechoice.ui.theme.TopBarColor
 import com.oktaygenc.cinechoice.ui.theme.oswald
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,6 +51,11 @@ fun CartScreen(navController: NavHostController) {
 
     // Toplam tutarı hesaplayan fonksiyon
     val totalAmount = cartMovies.sumOf { it.price * it.orderAmount }
+    LaunchedEffect(Unit) {
+        delay(2000)
+        viewModel.getMoviesInCart()
+
+    }
 
     Scaffold(
         topBar = {
@@ -90,21 +101,7 @@ fun CartScreen(navController: NavHostController) {
                     ) {
                         items(cartMovies) { movie ->
                             MovieItem(cartMovies = movie,
-                                onRemoveClick = { movieId -> viewModel.deleteMovieFromCart(movieId) },
-                                onDecreaseClick = { movieId -> viewModel.deleteMovieFromCart(movieId) },
-                                onIncreaseClick = {
-                                    viewModel.addMovieToCart(
-                                        name = movie.name,
-                                        image = movie.image,
-                                        price = movie.price,
-                                        category = movie.category,
-                                        rating = movie.rating,
-                                        year = movie.year,
-                                        director = movie.director,
-                                        description = movie.description,
-                                        orderAmount = movie.orderAmount
-                                    )
-                                })
+                                onRemoveClick = { movieId -> viewModel.deleteMovieFromCart(movieId) },)
                         }
                     }
 
@@ -127,7 +124,9 @@ fun CartScreen(navController: NavHostController) {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    CircularProgressIndicator()
+                    CircularProgressIndicator(
+                        color = SelectedButtonColor
+                    )
                 }
             }
         }
