@@ -36,28 +36,6 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
-// Karanlık ve açık tema renklerini tanımlıyoruz
-private val DarkColors = darkColors(
-    primary = Color(0xFFBB86FC),
-    secondary = Color(0xFF03DAC6),
-    background = Color(0xFF121212),
-    surface = Color(0xFF121212),
-    onPrimary = Color.Black,
-    onSecondary = Color.Black,
-    onBackground = Color.White,
-    onSurface = Color.White
-)
-
-private val LightColors = lightColors(
-    primary = Color(0xFF6200EE),
-    secondary = Color(0xFF03DAC6),
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black
-)
 
 @Composable
 fun CineChoiceTheme(
