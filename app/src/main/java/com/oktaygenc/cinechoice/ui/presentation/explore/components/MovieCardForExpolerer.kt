@@ -41,7 +41,7 @@ fun MovieCardForExplore(movie: Movie, modifier: Modifier = Modifier, onNavigateD
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp) // Kartın içindeki padding
+                .padding(12.dp)
         ) {
 
             AsyncImage(
@@ -52,10 +52,9 @@ fun MovieCardForExplore(movie: Movie, modifier: Modifier = Modifier, onNavigateD
                     .padding(end = 12.dp)
             )
 
-            // Movie bilgileri
             Column(
                 verticalArrangement = Arrangement.Center,
-                modifier = Modifier.weight(1f) // Yatayda metinler diğer bileşenlere göre esnemesin diye
+                modifier = Modifier.weight(1f)
             ) {
                 Text(
                     text = movie.name,

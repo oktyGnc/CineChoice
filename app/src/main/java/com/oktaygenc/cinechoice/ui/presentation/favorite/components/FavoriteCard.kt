@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.oktaygenc.cinechoice.data.model.entitiy.Movie
 import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
@@ -45,14 +46,13 @@ fun FavoriteCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp) // Padding inside the card
+                .padding(12.dp)
         ) {
-            // Image Section
             AsyncImage(
                 model = getImageUrl(movie.image),
                 contentDescription = movie.name,
                 modifier = Modifier
-                    .size(60.dp)
+                    .size(60.dp,75.dp)
                     .padding(end = 12.dp),
                 contentScale = ContentScale.Crop
             )
@@ -64,6 +64,7 @@ fun FavoriteCard(
             ) {
                 Text(
                     text = movie.name,
+                    fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.bodyLarge
                 )
@@ -84,19 +85,19 @@ fun FavoriteCard(
                         tint = SelectedButtonColor
                     )
                     Text(
-                        text = movie.rating.toString(), style = MaterialTheme.typography.bodyMedium
+                        text = movie.rating.toString(), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold
                     )
                 }
             }
 
-            // Remove button Section
             IconButton(
-                onClick = onRemoveClick, modifier = Modifier.align(Alignment.CenterVertically)
+                onClick = onRemoveClick, modifier = Modifier.align(Alignment.CenterVertically).size(40.dp)
             ) {
                 Icon(
                     imageVector = Icons.Filled.Delete,
                     contentDescription = "Remove from favorites",
-                    tint = SelectedButtonColor
+                    tint = SelectedButtonColor,
+                    modifier = Modifier.size(35.dp)
                 )
             }
         }
