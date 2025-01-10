@@ -55,10 +55,10 @@ fun Navigation(
             OnboardingScreen { navController.navigate("home") }
         }
         composable("login") {
-            LoginScreen(onLoginSuccess = { navController.navigate("home") })
+            LoginScreen(onLoginSuccess = { navController.navigate("home") },goRegister = { navController.navigate("register") })
         }
         composable("register") {
-            RegisterScreen(onRegisterSuccess = { navController.navigate("onBoarding") })
+            RegisterScreen(onRegisterSuccess = { navController.navigate("onBoarding") },goLogin = { navController.navigate("login") })
         }
         composable("explore") {
             ExploreScreen(navController)

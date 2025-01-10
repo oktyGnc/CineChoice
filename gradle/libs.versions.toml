@@ -27,6 +27,8 @@ ksp = "2.1.0-1.0.29"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.1.0"
 firebaseFirestore = "25.1.1"
+rive = "8.7.0"
+startup = "1.1.1"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityCompose" }
@@ -62,6 +64,9 @@ material3 = { module = "androidx.compose.material3:material3", version.ref = "ma
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+rive = { group = "app.rive", name = "rive-android", version.ref = "rive" }
+startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "startup" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

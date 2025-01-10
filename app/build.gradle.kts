@@ -95,5 +95,9 @@ dependencies {
     // Foundation
     implementation (libs.androidx.foundation)
 
+    //Rive Animation
+    implementation(libs.rive)
+    implementation(libs.startup)
+
 
 }
