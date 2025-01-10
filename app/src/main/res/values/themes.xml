@@ -2,5 +2,6 @@
 <resources>
     <style name="Theme.CineChoice" parent="android:Theme.Material.Light.NoActionBar">
         <item name = "android:windowIsTranslucent">true</item>
+        <item name = "android:statusBarColor">@color/status_bar_color</item>
     </style>
 </resources>
