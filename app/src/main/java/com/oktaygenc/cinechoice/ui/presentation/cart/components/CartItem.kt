@@ -25,12 +25,13 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.oktaygenc.cinechoice.R
 import com.oktaygenc.cinechoice.data.model.entitiy.CardItem
+import com.oktaygenc.cinechoice.domain.model.CartItemModel
 import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 
 @Composable
 fun MovieItem(
-    cartMovies: CardItem,
-    onRemoveClick: (Int) -> Unit,
+    cartMovies: CartItemModel,
+    onRemoveClick: (List<Int>) -> Unit,
 ) {
     Log.d("MovieItemddebug", "OrderAmount for ${cartMovies.name}: ${cartMovies.orderAmount}")
     Card(
@@ -76,7 +77,7 @@ fun MovieItem(
                 )
             }
             IconButton(
-                onClick = { onRemoveClick(cartMovies.cartId) },
+                onClick = { onRemoveClick(cartMovies.cartIdList) },
                 modifier = Modifier.align(Alignment.CenterVertically)
             ) {
                 Icon(

@@ -1,15 +1,16 @@
 package com.oktaygenc.cinechoice.data.model.entitiy
 
 data class CardItem(
-    val cartId: Int,
-    val name: String,
-    val image: String,
-    val price: Int,
-    val category: String,
-    val rating: Double,
-    val year: Int,
-    val director: String,
-    val description: String,
-    val orderAmount: Int,
-    val userName: String
+    val cartId: Int? = null,
+    val name: String? = null,
+    val image: String? = null,
+    val price: Int? = null,
+    val category: String? = null,
+    val rating: Double? = null,
+    val year: Int? = null,
+    val director: String? = null,
+    val description: String? = null,
+    val orderAmount: Int? = null,
+    val userName: String? = null,
 )
+

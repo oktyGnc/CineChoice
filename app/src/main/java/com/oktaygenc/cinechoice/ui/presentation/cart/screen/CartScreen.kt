@@ -46,15 +46,13 @@ import kotlinx.coroutines.delay
 @Composable
 fun CartScreen(navController: NavHostController) {
     val viewModel: CartScreenViewModel = hiltViewModel()
-    val cartMovies by viewModel.cartMovies.observeAsState(initial = emptyList())
+    val cartMovies by viewModel.cartMovies.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
 
     // Toplam tutarı hesaplayan fonksiyon
     val totalAmount = cartMovies.sumOf { it.price * it.orderAmount }
     LaunchedEffect(Unit) {
-        delay(2000)
         viewModel.getMoviesInCart()
-
     }
 
     Scaffold(
@@ -100,8 +98,10 @@ fun CartScreen(navController: NavHostController) {
                             .fillMaxSize()
                     ) {
                         items(cartMovies) { movie ->
-                            MovieItem(cartMovies = movie,
-                                onRemoveClick = { movieId -> viewModel.deleteMovieFromCart(movieId) },)
+                            MovieItem(
+                                cartMovies = movie,
+                                onRemoveClick = { movieId -> viewModel.deleteMovieFromCart(movieId) }
+                            )
                         }
                     }
 
