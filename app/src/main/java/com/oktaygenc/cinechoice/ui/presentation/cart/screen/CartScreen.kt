@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -31,12 +34,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.oktaygenc.cinechoice.ui.presentation.cart.components.MovieItem
 import com.oktaygenc.cinechoice.ui.presentation.cart.viewmodel.CartScreenViewModel
 import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
+import com.oktaygenc.cinechoice.ui.theme.TextSelectedButtonColor
 import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
 import com.oktaygenc.cinechoice.ui.theme.TopBarColor
 import com.oktaygenc.cinechoice.ui.theme.oswald
@@ -107,13 +114,31 @@ fun CartScreen(navController: NavHostController) {
 
                     Row(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
+                            .size(500.dp, 80.dp) // Daha düşük bir yükseklik belirledik
+                            .padding(8.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(text = "Total Amount:", style = MaterialTheme.typography.titleMedium)
-                        Text(text = "$$totalAmount", style = MaterialTheme.typography.titleMedium)
+                        Text(
+                            text = "Total Amount:${totalAmount}$",
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black
+                        )
+                        Button(
+                            onClick = { /* İşlem kodu */ },
+                            modifier = Modifier
+                                .size(200.dp, 40.dp) // Buton boyutunu daha kompakt hale getirdik
+                                .padding(start = 8.dp), // Sadece sol tarafına padding ekledik
+                            colors = ButtonDefaults.buttonColors(containerColor = SelectedButtonColor)
+                        ) {
+                            Text(
+                                text = "Place Order",
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = TextSelectedButtonColor,
+                            )
+                        }
                     }
                 }
             }

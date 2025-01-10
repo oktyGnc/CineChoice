@@ -26,6 +26,8 @@ import coil3.compose.AsyncImage
 import com.oktaygenc.cinechoice.R
 import com.oktaygenc.cinechoice.data.model.entitiy.CardItem
 import com.oktaygenc.cinechoice.domain.model.CartItemModel
+import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
+import com.oktaygenc.cinechoice.ui.theme.oswald
 import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 
 @Composable
@@ -33,6 +35,7 @@ fun MovieItem(
     cartMovies: CartItemModel,
     onRemoveClick: (List<Int>) -> Unit,
 ) {
+    var cardPriceCheck = cartMovies.price * cartMovies.orderAmount
     Log.d("MovieItemddebug", "OrderAmount for ${cartMovies.name}: ${cartMovies.orderAmount}")
     Card(
         modifier = Modifier
@@ -49,7 +52,7 @@ fun MovieItem(
                 model = getImageUrl(cartMovies.image),
                 contentDescription = cartMovies.name,
                 modifier = Modifier
-                    .size(100.dp, 130.dp) // Boyut ayarı
+                    .size(100.dp, 130.dp)
                     .clip(RoundedCornerShape(16.dp))
             )
 
@@ -57,6 +60,7 @@ fun MovieItem(
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = cartMovies.name,
+                    fontFamily = oswald,
                     style = MaterialTheme.typography.titleLarge,
                     color = Color.Black
                 )
@@ -66,13 +70,11 @@ fun MovieItem(
                     color = Color.Gray
                 )
                 Text(
-                    text = "Price: ${cartMovies.price}$",
-                    style = MaterialTheme.typography.bodyMedium,
+                    text = "Price: ${cardPriceCheck}$", fontFamily = oswald,
                     color = Color.Black
                 )
                 Text(
-                    text = "Order Amount: ${cartMovies.orderAmount}",
-                    style = MaterialTheme.typography.bodyMedium,
+                    text = "Order Amount: ${cartMovies.orderAmount}", fontFamily = oswald,
                     color = Color.Black
                 )
             }
@@ -83,7 +85,8 @@ fun MovieItem(
                 Icon(
                     painter = painterResource(id = R.drawable.ic_delete),
                     contentDescription = "Remove",
-                    tint = Color.Red
+                    tint = SelectedButtonColor,
+                    modifier = Modifier.size(40.dp)
                 )
             }
         }
