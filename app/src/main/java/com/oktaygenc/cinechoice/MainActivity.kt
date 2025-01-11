@@ -9,10 +9,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.oktaygenc.cinechoice.ui.navigation.navgraph.Navigation
-import com.oktaygenc.cinechoice.ui.navigation.screens.NavigationScreens
-import com.oktaygenc.cinechoice.ui.presentation.movielist.components.BottomNavigationBar
-import com.oktaygenc.cinechoice.ui.theme.CineChoiceTheme
+import com.oktaygenc.cinechoice.presentation.navigation.navgraph.Navigation
+import com.oktaygenc.cinechoice.presentation.navigation.screens.NavigationScreens
+import com.oktaygenc.cinechoice.presentation.screens.movielist.components.BottomNavigationBar
+import com.oktaygenc.cinechoice.presentation.common.theme.CineChoiceTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint // This annotation is used to indicate that the MainActivity will inject dependencies with Hilt.

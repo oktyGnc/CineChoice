@@ -1,6 +1,6 @@
 package com.oktaygenc.cinechoice.di.network
 
-import com.oktaygenc.cinechoice.retrofit.MovieApi
+import com.oktaygenc.cinechoice.data.retrofit.MovieApi
 import com.oktaygenc.cinechoice.utils.Constants
 import dagger.Module
 import dagger.Provides

@@ -3,7 +3,7 @@ package com.oktaygenc.cinechoice.data.datasource.movies
 import com.oktaygenc.cinechoice.data.model.response.AddDeleteResponse
 import com.oktaygenc.cinechoice.data.model.response.CartApiResponse
 import com.oktaygenc.cinechoice.data.model.response.MoviesApiResponse
-import com.oktaygenc.cinechoice.retrofit.MovieApi
+import com.oktaygenc.cinechoice.data.retrofit.MovieApi
 import javax.inject.Inject
 
 class MoviesDataSource @Inject constructor(
