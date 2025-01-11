@@ -21,7 +21,8 @@ class NavigationScreens {
                     Explore.route,
                     Favorite.route,
                     Profile.route,
-                    Cart.route -> true // Bottom bar shown for these screens
+                    Cart.route,
+                        -> true // Bottom bar shown for these screens
                     else -> false // Bottom bar hidden for other screens
                 }
             }

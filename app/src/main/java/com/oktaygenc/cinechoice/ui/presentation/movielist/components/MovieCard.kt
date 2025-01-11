@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
@@ -53,12 +51,10 @@ fun MovieCard(
 ) {
     var isFavorite by remember { mutableStateOf(false) }
 
-    Card(
-        modifier = modifier
-            .clickable { onClick() }
-            .wrapContentHeight(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
-    ) {
+    Card(modifier = modifier
+        .clickable { onClick() }
+        .wrapContentHeight(),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)) {
         Box {
             // Movie Image
             AsyncImage(
@@ -116,9 +112,7 @@ fun MovieCard(
                     tint = SelectedButtonColor
                 )
                 Text(
-                    text = movie.rating.toString(),
-                    fontSize = 15.sp,
-                    color = Color.Gray
+                    text = movie.rating.toString(), fontSize = 15.sp, color = Color.Gray
                 )
             }
 
@@ -134,8 +128,7 @@ fun MovieCard(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(
-                        text = "$${movie.price * 2}",
-                        style = TextStyle(
+                        text = "$${movie.price * 2}", style = TextStyle(
                             fontFamily = oswald,
                             textDecoration = TextDecoration.LineThrough,
                             color = Color.Gray,
@@ -152,8 +145,7 @@ fun MovieCard(
 
                 // Add to Cart Button
                 IconButton(
-                    onClick = { onAddToCartClick() },
-                    modifier = Modifier.size(40.dp)
+                    onClick = { onAddToCartClick() }, modifier = Modifier.size(40.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Filled.ShoppingCart,

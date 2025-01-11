@@ -16,10 +16,12 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
     private val favoriteRepository: FavoriteRepository,
-    private val authDataSource: AuthDataSource
+    private val authDataSource: AuthDataSource,
 ) : ViewModel() {
-    private val _favoriteMovies = MutableStateFlow<List<Movie>>(emptyList()) // StateFlow to hold favorite movies
-    val favoriteMovies: StateFlow<List<Movie>> = _favoriteMovies // Exposing favorite movies as StateFlow
+    private val _favoriteMovies =
+        MutableStateFlow<List<Movie>>(emptyList()) // StateFlow to hold favorite movies
+    val favoriteMovies: StateFlow<List<Movie>> =
+        _favoriteMovies // Exposing favorite movies as StateFlow
 
     init {
         loadFavorites() // Load favorite movies when ViewModel is initialized
@@ -29,14 +31,24 @@ class FavoriteViewModel @Inject constructor(
     fun loadFavorites() {
         viewModelScope.launch {
             val userId = authDataSource.getUserId() // Get the user ID from the data source
-            when (val result = favoriteRepository.getFavoriteMovies(userId)) { // Fetch favorite movies from repository
+            when (val result =
+                favoriteRepository.getFavoriteMovies(userId)) { // Fetch favorite movies from repository
                 is Resource.Success -> {
-                    Log.e("FavoriteViewModelGel", "Favorite movies loaded: ${result.data}") // Log successful load
-                    _favoriteMovies.value = result.data ?: emptyList() // Update the state with loaded data
+                    Log.e(
+                        "FavoriteViewModelGel",
+                        "Favorite movies loaded: ${result.data}"
+                    ) // Log successful load
+                    _favoriteMovies.value =
+                        result.data // Update the state with loaded data
                 }
+
                 is Resource.Error -> {
-                    Log.e("FavoriteViewModelHata", "Error loading favorite movies: ${result.message}") // Log error if loading fails
+                    Log.e(
+                        "FavoriteViewModelHata",
+                        "Error loading favorite movies: ${result.message}"
+                    ) // Log error if loading fails
                 }
+
                 else -> Unit // Do nothing for other cases
             }
         }
@@ -46,7 +58,10 @@ class FavoriteViewModel @Inject constructor(
     fun removeFavoriteMovie(movieId: Int) {
         viewModelScope.launch {
             val userId = authDataSource.getUserId() // Get the user ID from the data source
-            favoriteRepository.removeFavoriteMovie(userId, movieId) // Call repository to remove the movie
+            favoriteRepository.removeFavoriteMovie(
+                userId,
+                movieId
+            ) // Call repository to remove the movie
             loadFavorites() // Reload favorite movies after removal
         }
     }

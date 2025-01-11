@@ -7,9 +7,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -37,7 +34,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun FavoriteScreen(
     navController: NavHostController, // Navigation controller for screen navigation
-    viewModel: FavoriteViewModel // ViewModel to manage favorite movies
+    viewModel: FavoriteViewModel, // ViewModel to manage favorite movies
 ) {
     var isLoading by remember { mutableStateOf(true) } // Loading state to show progress indicator
 
@@ -47,7 +44,8 @@ fun FavoriteScreen(
         isLoading = false // Set loading state to false once data is loaded
     }
 
-    val favoriteMovies = viewModel.favoriteMovies.collectAsStateWithLifecycle() // Observe favorite movies
+    val favoriteMovies =
+        viewModel.favoriteMovies.collectAsStateWithLifecycle() // Observe favorite movies
 
     Scaffold { paddingValues ->
         Box(
@@ -57,8 +55,7 @@ fun FavoriteScreen(
         ) {
             if (isLoading) { // Show loading indicator while data is loading
                 CircularProgressIndicator(
-                    color = SelectedButtonColor,
-                    modifier = Modifier.align(Alignment.Center)
+                    color = SelectedButtonColor, modifier = Modifier.align(Alignment.Center)
                 )
             } else if (favoriteMovies.value.isEmpty()) { // Display message when no favorites are added
                 Column(
@@ -74,7 +71,8 @@ fun FavoriteScreen(
                     )
                     Button(
                         onClick = { navController.navigate("home") }, // Navigate to home screen
-                        modifier = Modifier.padding(top = 8.dp), colors = ButtonDefaults.buttonColors(
+                        modifier = Modifier.padding(top = 8.dp),
+                        colors = ButtonDefaults.buttonColors(
                             containerColor = SelectedButtonColor,
                             contentColor = TextSelectedButtonColor
                         )
@@ -84,12 +82,10 @@ fun FavoriteScreen(
                 }
             } else { // Display list of favorite movies if available
                 LazyColumn(
-                    contentPadding = PaddingValues(8.dp),
-                    modifier = Modifier.fillMaxSize()
+                    contentPadding = PaddingValues(8.dp), modifier = Modifier.fillMaxSize()
                 ) {
                     items(favoriteMovies.value) { movie -> // Iterate over favorite movies
-                        FavoriteCard(
-                            movie = movie,
+                        FavoriteCard(movie = movie,
                             onRemoveClick = { viewModel.removeFavoriteMovie(movie.id) } // Remove movie from favorites
                         )
                     }

@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
 ) : ViewModel() {
     // State flow to manage user authentication state
     private val _userState = MutableStateFlow<Resource<FirebaseUser>>(Resource.Empty)

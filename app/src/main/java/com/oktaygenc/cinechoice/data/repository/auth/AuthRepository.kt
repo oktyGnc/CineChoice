@@ -9,7 +9,7 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class AuthRepository @Inject constructor(
-    private val authDataSource: AuthDataSource // Injecting AuthDataSource to handle authentication
+    private val authDataSource: AuthDataSource,
 ) {
     // Function to handle user login
     suspend fun login(email: String, password: String): Resource<String> {
@@ -32,12 +32,16 @@ class AuthRepository @Inject constructor(
             } catch (e: Exception) {
                 // Handle any exceptions that occur during the await process
                 Log.e(TAG, "Login await failed", e)
-                Resource.Error(e.message ?: "Login Failed") // Return error result with exception message
+                Resource.Error(
+                    e.message ?: "Login Failed"
+                ) // Return error result with exception message
             }
         } catch (e: Exception) {
             // Handle any exceptions that occur during the sign-in process
             Log.e(TAG, "Login process failed", e)
-            Resource.Error(e.message ?: "Authentication failed") // Return error result with exception message
+            Resource.Error(
+                e.message ?: "Authentication failed"
+            ) // Return error result with exception message
         }
     }
 
@@ -62,12 +66,16 @@ class AuthRepository @Inject constructor(
             } catch (e: Exception) {
                 // Handle any exceptions that occur during the await process
                 Log.e(TAG, "Registration await failed", e)
-                Resource.Error(e.message ?: "Registration Failed") // Return error result with exception message
+                Resource.Error(
+                    e.message ?: "Registration Failed"
+                ) // Return error result with exception message
             }
         } catch (e: Exception) {
             // Handle any exceptions that occur during the registration process
             Log.e(TAG, "Registration process failed", e)
-            Resource.Error(e.message ?: "Registration failed") // Return error result with exception message
+            Resource.Error(
+                e.message ?: "Registration failed"
+            ) // Return error result with exception message
         }
     }
 }

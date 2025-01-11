@@ -11,5 +11,5 @@ data class CartItemModel(
     val director: String,
     val description: String,
     val orderAmount: Int,
-    val userName: String
+    val userName: String,
 )

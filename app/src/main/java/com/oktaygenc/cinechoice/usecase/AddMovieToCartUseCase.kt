@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 // Use case for adding a movie to the cart.
 class AddMovieToCartUseCase @Inject constructor(
-    private val repository: MovieRepository // Injects the repository to interact with movie data.
+    private val repository: MovieRepository, // Injects the repository to interact with movie data.
 ) {
     // This function is invoked to add a movie to the cart.
     suspend operator fun invoke(
@@ -23,8 +23,7 @@ class AddMovieToCartUseCase @Inject constructor(
     ): Resource<String> {
         // Calls the repository function to add the movie to the cart and returns the result.
         return repository.addMovieToCart(
-            name, image, price, category, rating,
-            year, director, description, orderAmount
+            name, image, price, category, rating, year, director, description, orderAmount
         )
     }
 }

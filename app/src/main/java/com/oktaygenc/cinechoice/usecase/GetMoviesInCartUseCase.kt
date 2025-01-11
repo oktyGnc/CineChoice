@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 // Use case for fetching movies currently in the user's cart.
 class GetMoviesInCartUseCase @Inject constructor(
-    private val repository: MovieRepository // Injects the repository to retrieve cart items.
+    private val repository: MovieRepository, // Injects the repository to retrieve cart items.
 ) {
     // This function is invoked to fetch the list of movies in the cart.
     suspend operator fun invoke(): Resource<List<CartItemModel>> {

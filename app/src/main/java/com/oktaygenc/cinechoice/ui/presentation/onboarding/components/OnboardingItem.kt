@@ -25,9 +25,7 @@ import com.oktaygenc.cinechoice.R
 fun OnboardingItem(page: Int) {
     // List of titles for each onboarding page
     val titles = listOf(
-        "Welcome",
-        "Explore",
-        "Get Started"
+        "Welcome", "Explore", "Get Started"
     )
 
     // List of descriptions for each onboarding page
@@ -50,8 +48,7 @@ fun OnboardingItem(page: Int) {
 
     // Control the animation progress and make it loop infinitely
     val progress by animateLottieCompositionAsState(
-        composition = composition,
-        iterations = LottieConstants.IterateForever
+        composition = composition, iterations = LottieConstants.IterateForever
     )
 
     // Layout for the onboarding item
@@ -71,18 +68,14 @@ fun OnboardingItem(page: Int) {
 
         // Display the title for the current page
         Text(
-            text = titles[page],
-            fontSize = 24.sp,
-            textAlign = TextAlign.Center
+            text = titles[page], fontSize = 24.sp, textAlign = TextAlign.Center
         )
 
         Spacer(modifier = Modifier.height(16.dp)) // Space between title and description
 
         // Display the description for the current page
         Text(
-            text = descriptions[page],
-            fontSize = 16.sp,
-            textAlign = TextAlign.Center
+            text = descriptions[page], fontSize = 16.sp, textAlign = TextAlign.Center
         )
     }
 }

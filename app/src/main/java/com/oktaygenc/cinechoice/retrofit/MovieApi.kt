@@ -19,7 +19,7 @@ interface MovieApi {
     @FormUrlEncoded
     suspend fun getMoviesInCart(
         // Retrieves the username (from UserSessionManager).
-        @Field("userName") userName: String = UserSessionManager.getCurrentUser()
+        @Field("userName") userName: String = UserSessionManager.getCurrentUser(),
     ): CartApiResponse
 
     // Sends a POST request to add a movie to the cart.
@@ -37,7 +37,7 @@ interface MovieApi {
         @Field("description") description: String,
         @Field("orderAmount") orderAmount: Int,
         // Retrieves the username (from UserSessionManager).
-        @Field("userName") userName: String = UserSessionManager.getCurrentUser()
+        @Field("userName") userName: String = UserSessionManager.getCurrentUser(),
     ): AddDeleteResponse
 
     // Sends a POST request to delete a movie from the cart.
@@ -47,7 +47,7 @@ interface MovieApi {
         // Sends the cart ID of the movie to be deleted.
         @Field("cartId") cartId: Int,
         // Retrieves the username (from UserSessionManager).
-        @Field("userName") userName: String = UserSessionManager.getCurrentUser()
+        @Field("userName") userName: String = UserSessionManager.getCurrentUser(),
     ): AddDeleteResponse
 }
 

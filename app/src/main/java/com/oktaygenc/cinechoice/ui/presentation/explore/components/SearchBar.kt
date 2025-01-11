@@ -2,7 +2,6 @@ package com.oktaygenc.cinechoice.ui.presentation.explore.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -18,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.oktaygenc.cinechoice.ui.presentation.explore.viewmodel.ExploreViewModel
 import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
-import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
 import com.oktaygenc.cinechoice.ui.theme.TopBarColor
 import com.oktaygenc.cinechoice.ui.theme.oswald
 
@@ -37,7 +35,9 @@ fun SearchBar(
         label = { Text("Search", color = TopBarColor, fontFamily = oswald, fontSize = 18.sp) },
         leadingIcon = {
             Icon(
-                imageVector = Icons.Default.Search, contentDescription = "Search Icon", tint = TopBarColor
+                imageVector = Icons.Default.Search,
+                contentDescription = "Search Icon",
+                tint = TopBarColor
             )
         },
         modifier = modifier

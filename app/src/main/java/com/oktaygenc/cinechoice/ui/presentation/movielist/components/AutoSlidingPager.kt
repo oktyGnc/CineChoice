@@ -36,7 +36,7 @@ fun AutoSlidingPager() {
 
     // Automatic sliding of pages
     LaunchedEffect(key1 = Unit) {
-        while(true) {
+        while (true) {
             delay(4000L) // Wait for 4 seconds
             coroutineScope.launch {
                 val nextPage = (pagerState.currentPage + 1) % actualPageCount // Get next page
@@ -47,8 +47,7 @@ fun AutoSlidingPager() {
 
     // Main container Box for layout
     Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ) {
         // Box for Pager UI
         Box(

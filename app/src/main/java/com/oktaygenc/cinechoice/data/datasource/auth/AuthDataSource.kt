@@ -2,11 +2,10 @@ package com.oktaygenc.cinechoice.data.datasource.auth
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
 
 class AuthDataSource @Inject constructor(
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
 ) {
     companion object {
         private const val TAG = "AuthDataSource" // Tag used for logging

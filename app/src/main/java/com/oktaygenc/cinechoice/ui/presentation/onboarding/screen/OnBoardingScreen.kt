@@ -53,11 +53,9 @@ fun OnboardingScreen(onFinished: () -> Unit) {
             // Show the "Skip" button on all pages except the last one (page 2)
             if (pagerState.currentPage != 2) {
                 Button(
-                    onClick = { onFinished() },
-                    colors = ButtonDefaults.buttonColors(
+                    onClick = { onFinished() }, colors = ButtonDefaults.buttonColors(
                         containerColor = SelectedButtonColor, contentColor = TextSelectedButtonColor
-                    ),
-                    modifier = Modifier.padding(end = 8.dp)
+                    ), modifier = Modifier.padding(end = 8.dp)
                 ) {
                     Text(
                         text = "Skip",
@@ -81,11 +79,9 @@ fun OnboardingScreen(onFinished: () -> Unit) {
                             pagerState.animateScrollToPage(pagerState.currentPage + 1)
                         }
                     }
-                },
-                colors = ButtonDefaults.buttonColors(
+                }, colors = ButtonDefaults.buttonColors(
                     containerColor = SelectedButtonColor, contentColor = TextSelectedButtonColor
-                ),
-                modifier = Modifier.padding(end = 8.dp)
+                ), modifier = Modifier.padding(end = 8.dp)
             ) {
                 Text(
                     text = if (pagerState.currentPage == 2) "Finish" else "Next",

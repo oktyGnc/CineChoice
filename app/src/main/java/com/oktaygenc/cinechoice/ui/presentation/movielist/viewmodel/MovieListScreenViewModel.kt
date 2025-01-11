@@ -37,9 +37,15 @@ class MovieListScreenViewModel @Inject constructor(
         when (action) {
             // Handling the action when a movie is added to the cart
             is MoviesAction.OnCartClick -> addMovieToCart(
-                action.movie.name, action.movie.image, action.movie.price,
-                action.movie.category, action.movie.rating, action.movie.year,
-                action.movie.director, action.movie.description, 1
+                action.movie.name,
+                action.movie.image,
+                action.movie.price,
+                action.movie.category,
+                action.movie.rating,
+                action.movie.year,
+                action.movie.director,
+                action.movie.description,
+                1
             )
 
             // Handling the action when a category is selected
@@ -63,14 +69,17 @@ class MovieListScreenViewModel @Inject constructor(
                 is Resource.Success -> updateUiState {
                     // If the movies are successfully fetched, update the UI state with movies data
                     copy(
-                        movies = resource.data,
-                        filteredMovies = resource.data,
-                        isLoading = false
+                        movies = resource.data, filteredMovies = resource.data, isLoading = false
                     )
                 }
 
                 // If there is an error, update the UI state with the error message
-                is Resource.Error -> updateUiState { copy(error = resource.message, isLoading = false) }
+                is Resource.Error -> updateUiState {
+                    copy(
+                        error = resource.message,
+                        isLoading = false
+                    )
+                }
 
                 // Placeholder for handling empty or loading states
                 Resource.Empty -> TODO()
@@ -93,8 +102,7 @@ class MovieListScreenViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             val resource = addMovieToCartUseCase(
-                name, image, price, category, rating, year, director,
-                description, orderAmount
+                name, image, price, category, rating, year, director, description, orderAmount
             )
 
             when (resource) {

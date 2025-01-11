@@ -57,42 +57,39 @@ fun MovieListScreen(
     // Create a scroll state for the LazyGrid
     val scrollState = rememberLazyGridState()
 
-    Scaffold(
-        topBar = {
-            // TopAppBar with a title and cart icon
-            TopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor),
-                title = {
-                    // Box containing the app name centered in the TopAppBar
-                    Box(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "CineChoice",
-                            color = TopBarColor,
-                            fontFamily = lobster,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 36.sp,
-                            modifier = Modifier.padding(start = 20.dp)
-                        )
-                    }
-                },
-                actions = {
-                    // Cart button in the TopAppBar
-                    IconButton(onClick = onNavigateCart) {
-                        Icon(
-                            modifier = Modifier.size(30.dp),
-                            imageVector = Icons.Default.ShoppingCart,
-                            contentDescription = "Cart",
-                            tint = DeleteColor
-                        )
-                    }
-                },
-                scrollBehavior = scrollBehavior
-            )
-        }
-    ) { paddingValues ->
+    Scaffold(topBar = {
+        // TopAppBar with a title and cart icon
+        TopAppBar(
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor),
+            title = {
+                // Box containing the app name centered in the TopAppBar
+                Box(
+                    modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "CineChoice",
+                        color = TopBarColor,
+                        fontFamily = lobster,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 36.sp,
+                        modifier = Modifier.padding(start = 20.dp)
+                    )
+                }
+            },
+            actions = {
+                // Cart button in the TopAppBar
+                IconButton(onClick = onNavigateCart) {
+                    Icon(
+                        modifier = Modifier.size(30.dp),
+                        imageVector = Icons.Default.ShoppingCart,
+                        contentDescription = "Cart",
+                        tint = DeleteColor
+                    )
+                }
+            },
+            scrollBehavior = scrollBehavior
+        )
+    }) { paddingValues ->
         // Box wrapping the main content of the screen
         Box(
             modifier = Modifier
@@ -136,17 +133,14 @@ fun MovieListScreen(
 
                         // Second item: Category selection buttons that span both columns
                         item(span = { GridItemSpan(2) }) {
-                            SingleSelectionButtons(
-                                onCategorySelected = { category ->
-                                    onAction(MoviesAction.OnCategoryClick(category)) // Notify parent component of category selection
-                                }
-                            )
+                            SingleSelectionButtons(onCategorySelected = { category ->
+                                onAction(MoviesAction.OnCategoryClick(category)) // Notify parent component of category selection
+                            })
                         }
 
                         // Display each filtered movie item
                         items(state.filteredMovies) { movie ->
-                            MovieCard(
-                                movie = movie,
+                            MovieCard(movie = movie,
                                 onAddToCartClick = {
                                     onNavigateCart() // Navigate to cart
                                     onAction(MoviesAction.OnCartClick(movie)) // Add movie to cart

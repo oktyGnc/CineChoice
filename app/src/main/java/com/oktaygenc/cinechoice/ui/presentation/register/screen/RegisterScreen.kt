@@ -1,15 +1,11 @@
 package com.oktaygenc.cinechoice.ui.presentation.register.screen
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -26,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -35,11 +30,8 @@ import app.rive.runtime.kotlin.core.ExperimentalAssetLoader
 import com.oktaygenc.cinechoice.R
 import com.oktaygenc.cinechoice.ui.presentation.register.viewmodel.RegisterViewModel
 import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
-import com.oktaygenc.cinechoice.ui.theme.TextSelectedButtonColor
 import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
-import com.oktaygenc.cinechoice.ui.theme.TopBarColor
 import com.oktaygenc.cinechoice.utils.Resource
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 // Constants for Rive animation state machine
@@ -77,11 +69,10 @@ fun RegisterScreen(
             .background(TopAndBottomBarColor)
     ) {
         // Rive animation view
-        AndroidView(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(0.5f)
-                .scale(1.2f, 1.2f),
+        AndroidView(modifier = Modifier
+            .fillMaxWidth()
+            .weight(0.5f)
+            .scale(1.2f, 1.2f),
             factory = { context ->
                 RiveAnimationView(context).apply {
                     setRiveResource(
@@ -91,8 +82,7 @@ fun RegisterScreen(
                     )
                     riveView = this
                 }
-            }
-        )
+            })
 
         // Registration form column
         Column(
@@ -105,16 +95,14 @@ fun RegisterScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Email and password input fields
-            TextField(
-                value = email,
+            TextField(value = email,
                 onValueChange = { email = it },
                 label = { Text("Email") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .onFocusChanged { focusState ->
                         isEmailFocus = focusState.isFocused
-                    }
-            )
+                    })
 
             // Register button with state handling
             Button(
@@ -123,8 +111,7 @@ fun RegisterScreen(
                         // Trigger registration process
                         registerViewModel.register(email, password)
                     }
-                },
-                modifier = Modifier.fillMaxWidth()
+                }, modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Register")
             }
@@ -136,6 +123,7 @@ fun RegisterScreen(
                 is Resource.Success -> {
                     LaunchedEffect(Unit) { onRegisterSuccess() }
                 }
+
                 is Resource.Empty -> {}
             }
         }

@@ -27,7 +27,11 @@ import com.oktaygenc.cinechoice.ui.theme.TextSelectedButtonColor
 import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 
 @Composable
-fun MovieCardForExplore(movie: Movie, modifier: Modifier = Modifier, onNavigateDetail: (Movie) -> Unit) {
+fun MovieCardForExplore(
+    movie: Movie,
+    modifier: Modifier = Modifier,
+    onNavigateDetail: (Movie) -> Unit,
+) {
     // Card that represents the movie item
     Card(
         modifier = modifier
@@ -53,8 +57,7 @@ fun MovieCardForExplore(movie: Movie, modifier: Modifier = Modifier, onNavigateD
 
             // Column for movie details (name, category, rating)
             Column(
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier.weight(1f)
+                verticalArrangement = Arrangement.Center, modifier = Modifier.weight(1f)
             ) {
                 Text(
                     text = movie.name,

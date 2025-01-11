@@ -18,35 +18,22 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint // This annotation is used to indicate that the MainActivity will inject dependencies with Hilt.
 class MainActivity : ComponentActivity() {
 
-    // onCreate method is the entry point where we set up the UI and handle navigation.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Using Jetpack Compose to set the content view
         setContent {
-
-            // Remember the NavController for managing navigation between screens
             val navController = rememberNavController()
-
-            // Current route, used for conditionally displaying components (like bottom bar)
             val currentRoute =
                 navController.currentBackStackEntryAsState().value?.destination?.route
-
-            // App theme applied here using the 'CineChoiceTheme'
             CineChoiceTheme {
-
-                // Scaffold provides the basic layout structure
-                Scaffold(
-                    // Content of the screen, including navigation
-                    content = {
-                        Navigation(
-                            modifier = Modifier
-                                .fillMaxSize() // Make the navigation take up all available space
-                                .padding(it), // Apply any padding (in this case, from the Scaffold)
-                            navController = navController,
-                            startDestination = "splash" // Define the initial screen as "splash"
-                        )
-                    },
+                Scaffold(content = {
+                    Navigation(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(it),
+                        navController = navController,
+                        startDestination = "splash" // Define the initial screen as "splash"
+                    )
+                },
                     // Bottom bar is conditionally displayed based on the current route
                     bottomBar = {
                         if (NavigationScreens.Screen.shouldShowBottomBar(currentRoute)) {

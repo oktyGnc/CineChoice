@@ -3,8 +3,8 @@ package com.oktaygenc.cinechoice.ui.presentation.login.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.oktaygenc.cinechoice.utils.Resource
 import com.oktaygenc.cinechoice.data.repository.auth.AuthRepository
+import com.oktaygenc.cinechoice.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,13 +13,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authRepository: AuthRepository // Repository for authentication
+    private val authRepository: AuthRepository, // Repository for authentication
 ) : ViewModel() {
     companion object {
         private const val TAG = "LoginViewModel" // Log tag
     }
 
-    private val _loginState = MutableStateFlow<Resource<String>>(Resource.Empty) // Track login state
+    private val _loginState =
+        MutableStateFlow<Resource<String>>(Resource.Empty) // Track login state
     val loginState: StateFlow<Resource<String>> = _loginState // Public state
 
     // Login function
@@ -34,7 +35,8 @@ class LoginViewModel @Inject constructor(
                 _loginState.value = result // Update state
             } catch (e: Exception) {
                 Log.e(TAG, "Login failed", e) // Log error
-                _loginState.value = Resource.Error(e.message ?: "An error occurred") // Set error state
+                _loginState.value =
+                    Resource.Error(e.message ?: "An error occurred") // Set error state
             }
         }
     }

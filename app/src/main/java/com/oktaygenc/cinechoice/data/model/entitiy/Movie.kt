@@ -10,7 +10,7 @@ data class Movie(
     val rating: Double = 0.0,
     val year: Int = 0,
     val director: String = "",
-    val description: String = ""
+    val description: String = "",
 ) {
     // Secondary constructor providing default values
     constructor() : this(0, "", "", 0, "", 0.0, 0, "", "")

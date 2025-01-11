@@ -22,7 +22,7 @@ import com.oktaygenc.cinechoice.ui.presentation.explore.viewmodel.ExploreViewMod
 
 @Composable
 fun ExploreScreen(
-    navController: NavHostController
+    navController: NavHostController,
 ) {
     val viewModel: ExploreViewModel = hiltViewModel() // Get the ViewModel using Hilt
     val state = viewModel.movies.value // Get the list of movies
@@ -31,7 +31,10 @@ fun ExploreScreen(
     Scaffold(
         content = { paddingValues ->
             Box(modifier = Modifier.padding(paddingValues)) {
-                Column(modifier = Modifier.fillMaxSize().padding(16.dp)
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp)
                 ) {
                     SearchBar(viewModel = viewModel) // Search bar component
                     Spacer(modifier = Modifier.height(16.dp))
@@ -41,19 +44,17 @@ fun ExploreScreen(
                         items(state.filter { movie ->
                             movie.name.contains(searchQuery, ignoreCase = true)
                         }) { movie ->
-                            MovieCardForExplore(
-                                movie = movie,
+                            MovieCardForExplore(movie = movie,
                                 modifier = Modifier.padding(bottom = 8.dp),
                                 onNavigateDetail = {
-                                    val movieJson = Gson().toJson(it) // Convert movie object to JSON
+                                    val movieJson =
+                                        Gson().toJson(it) // Convert movie object to JSON
                                     navController.navigate("detail/$movieJson") // Navigate to movie detail screen
-                                }
-                            )
+                                })
                         }
                     }
                 }
             }
-        },
-        containerColor = Color.White
+        }, containerColor = Color.White
     )
 }

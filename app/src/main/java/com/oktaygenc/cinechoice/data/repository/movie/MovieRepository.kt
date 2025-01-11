@@ -8,7 +8,7 @@ import com.oktaygenc.cinechoice.utils.Resource
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
-    private val moviesDataSource: MoviesDataSource, // Injecting MoviesDataSource to interact with the movie API
+    private val moviesDataSource: MoviesDataSource,
 ) {
     // Function to get all movies from the data source
     suspend fun getAllMovies(): Resource<List<Movie>> {
@@ -74,7 +74,9 @@ class MovieRepository @Inject constructor(
             val groupedFilms = response.cartItems?.groupBy { it.name }
             val mergedFilms = groupedFilms?.map { (_, films) ->
                 val firstFilm = films.first().toModel() // Get the first film's data
-                val totalAmount = films.sumOf { it.orderAmount ?: 0 } // Sum the order amounts for duplicate movies
+                val totalAmount = films.sumOf {
+                    it.orderAmount ?: 0
+                } // Sum the order amounts for duplicate movies
                 val cartIdList = films.map { it.cartId ?: 0 } // List of cart IDs for the same movie
                 firstFilm.copy(
                     orderAmount = totalAmount,

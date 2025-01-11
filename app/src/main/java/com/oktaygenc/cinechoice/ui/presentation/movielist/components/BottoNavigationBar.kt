@@ -39,8 +39,7 @@ fun BottomNavigationBar(navController: NavController) {
             NavigationBarItem(
                 icon = {
                     Icon(
-                        imageVector = item.icon,
-                        contentDescription = item.label
+                        imageVector = item.icon, contentDescription = item.label
                     )
                 },
                 label = { Text(item.label) },

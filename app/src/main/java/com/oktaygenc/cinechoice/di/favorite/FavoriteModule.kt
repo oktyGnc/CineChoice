@@ -1,8 +1,8 @@
 package com.oktaygenc.cinechoice.di.favorite
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.oktaygenc.cinechoice.data.datasource.favorite.FavoriteDataSource
 import com.oktaygenc.cinechoice.data.datasource.auth.AuthDataSource
+import com.oktaygenc.cinechoice.data.datasource.favorite.FavoriteDataSource
 import com.oktaygenc.cinechoice.data.repository.favorite.FavoriteRepository
 import dagger.Module
 import dagger.Provides

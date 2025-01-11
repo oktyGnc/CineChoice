@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 // Use case for fetching all movies.
 class GetAllMoviesUseCase @Inject constructor(
-    private val repository: MovieRepository // Injects the repository to retrieve movie data.
+    private val repository: MovieRepository, // Injects the repository to retrieve movie data.
 ) {
     // This function is invoked to fetch the list of all movies from the repository.
     suspend operator fun invoke(): Resource<List<Movie>> {

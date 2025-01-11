@@ -1,6 +1,5 @@
 package com.oktaygenc.cinechoice.ui.presentation.cart.components
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,7 +23,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.oktaygenc.cinechoice.R
-import com.oktaygenc.cinechoice.data.model.entitiy.CardItem
 import com.oktaygenc.cinechoice.domain.model.CartItemModel
 import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
 import com.oktaygenc.cinechoice.ui.theme.oswald
@@ -46,8 +44,7 @@ fun MovieItem(
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically
         ) {
             // Display movie image
             AsyncImage(
@@ -73,11 +70,11 @@ fun MovieItem(
                     color = Color.Gray
                 )
                 Text(
-                    text = "Price: ${cardPriceCheck}$", fontFamily = oswald,
-                    color = Color.Black
+                    text = "Price: ${cardPriceCheck}$", fontFamily = oswald, color = Color.Black
                 )
                 Text(
-                    text = "Order Amount: ${cartMovies.orderAmount}", fontFamily = oswald,
+                    text = "Order Amount: ${cartMovies.orderAmount}",
+                    fontFamily = oswald,
                     color = Color.Black
                 )
             }

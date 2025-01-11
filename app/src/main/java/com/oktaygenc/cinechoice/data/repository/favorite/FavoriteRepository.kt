@@ -1,7 +1,7 @@
 package com.oktaygenc.cinechoice.data.repository.favorite
 
-import com.oktaygenc.cinechoice.data.datasource.favorite.FavoriteDataSource
 import com.oktaygenc.cinechoice.data.datasource.auth.AuthDataSource
+import com.oktaygenc.cinechoice.data.datasource.favorite.FavoriteDataSource
 import com.oktaygenc.cinechoice.data.model.entitiy.Movie
 import com.oktaygenc.cinechoice.utils.Resource
 import kotlinx.coroutines.tasks.await

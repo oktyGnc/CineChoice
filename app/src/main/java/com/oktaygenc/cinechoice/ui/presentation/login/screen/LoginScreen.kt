@@ -27,7 +27,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -39,12 +38,12 @@ import com.oktaygenc.cinechoice.ui.presentation.login.viewmodel.LoginViewModel
 import com.oktaygenc.cinechoice.ui.theme.SelectedButtonColor
 import com.oktaygenc.cinechoice.ui.theme.TextSelectedButtonColor
 import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
-import com.oktaygenc.cinechoice.ui.theme.TopBarColor
 import com.oktaygenc.cinechoice.utils.Resource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-private const val STATE_MACHINE_NAME = "State Machine 1" // The name of the state machine used in the Rive animation
+private const val STATE_MACHINE_NAME =
+    "State Machine 1" // The name of the state machine used in the Rive animation
 private const val DELAY = 500L // Delay for handling button press animation
 
 @OptIn(ExperimentalAssetLoader::class)
@@ -52,7 +51,7 @@ private const val DELAY = 500L // Delay for handling button press animation
 fun LoginScreen(
     loginViewModel: LoginViewModel = hiltViewModel(),
     onLoginSuccess: () -> Unit,
-    goRegister: () -> Unit
+    goRegister: () -> Unit,
 ) {
     val loginState by loginViewModel.loginState.collectAsState()
     var email by remember { mutableStateOf("") }
@@ -146,10 +145,10 @@ fun LoginScreen(
                             riveView?.fireState(STATE_MACHINE_NAME, "fail")
                         }
                     }
-                }, modifier = Modifier.fillMaxWidth(),
+                },
+                modifier = Modifier.fillMaxWidth(),
                 colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                    containerColor = SelectedButtonColor,
-                    contentColor = TextSelectedButtonColor
+                    containerColor = SelectedButtonColor, contentColor = TextSelectedButtonColor
                 )
             ) {
                 Text("Login")
@@ -166,12 +165,15 @@ fun LoginScreen(
                 is Resource.Loading -> CircularProgressIndicator(
                     color = SelectedButtonColor
                 )
+
                 is Resource.Error -> Text(
                     text = "E-mail or Password incorrect", color = MaterialTheme.colors.error
                 )
+
                 is Resource.Success -> {
                     LaunchedEffect(Unit) { onLoginSuccess() } // Call the success callback
                 }
+
                 is Resource.Empty -> {}
             }
         }

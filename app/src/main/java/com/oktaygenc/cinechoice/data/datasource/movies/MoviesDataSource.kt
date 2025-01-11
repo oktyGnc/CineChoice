@@ -22,11 +22,10 @@ class MoviesDataSource @Inject constructor(
         year: Int,
         director: String,
         description: String,
-        orderAmount: Int
+        orderAmount: Int,
     ): AddDeleteResponse {
         return movieApi.addMovieToCart(
-            name, image, price, category, rating, year,
-            director, description, orderAmount
+            name, image, price, category, rating, year, director, description, orderAmount
         )
     }
 

@@ -1,13 +1,9 @@
 package com.oktaygenc.cinechoice.ui.presentation.cart.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.oktaygenc.cinechoice.data.model.entitiy.CardItem
 import com.oktaygenc.cinechoice.domain.model.CartItemModel
-import com.oktaygenc.cinechoice.usecase.AddMovieToCartUseCase
 import com.oktaygenc.cinechoice.usecase.DeleteMovieFromCartUseCase
 import com.oktaygenc.cinechoice.usecase.GetMoviesInCartUseCase
 import com.oktaygenc.cinechoice.utils.Resource
@@ -43,7 +39,8 @@ class CartScreenViewModel @Inject constructor(
             _isLoading.value = true
             // Call the use case to get the movies
             when (val resource = getMoviesInCartUseCase.invoke()) {
-                is Resource.Success -> _cartMovies.value = resource.data  // On success, update the cart
+                is Resource.Success -> _cartMovies.value =
+                    resource.data  // On success, update the cart
                 is Resource.Error -> {
                     // Log error if fetching the cart fails
                     Log.e(
@@ -51,6 +48,7 @@ class CartScreenViewModel @Inject constructor(
                     )
                     _cartMovies.value = emptyList()  // Clear the cart if there's an error
                 }
+
                 else -> Unit  // No action for other resource states
             }
             _isLoading.value = false
@@ -64,8 +62,16 @@ class CartScreenViewModel @Inject constructor(
             // Iterate through the list of cart IDs and delete each movie
             cartIdList.forEach { cartId ->
                 when (val resource = deleteMovieFromCartUseCase.invoke(cartId)) {
-                    is Resource.Success -> Log.d("CartViewModel", "Movie deleted from cart: ${resource.data}")
-                    is Resource.Error -> Log.e("CartViewModel", "Error deleting movie from cart: ${resource.message}")
+                    is Resource.Success -> Log.d(
+                        "CartViewModel",
+                        "Movie deleted from cart: ${resource.data}"
+                    )
+
+                    is Resource.Error -> Log.e(
+                        "CartViewModel",
+                        "Error deleting movie from cart: ${resource.message}"
+                    )
+
                     else -> Unit
                 }
                 _isLoading.value = false

@@ -28,19 +28,16 @@ import com.oktaygenc.cinechoice.ui.presentation.splash.SplashScreen
 fun Navigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    startDestination: String
+    startDestination: String,
 ) {
     NavHost(
-        modifier = modifier,
-        navController = navController,
-        startDestination = startDestination
+        modifier = modifier, navController = navController, startDestination = startDestination
     ) {
         composable("home") {
             // Movie list screen with view model and navigation actions
             val viewModel: MovieListScreenViewModel = hiltViewModel()
             val state by viewModel.state
-            MovieListScreen(
-                state = state,
+            MovieListScreen(state = state,
                 onNavigateCart = { navController.navigate("cart") },
                 onNavigateDetail = {
                     val movieJson = Gson().toJson(it)
@@ -59,11 +56,15 @@ fun Navigation(
         }
         composable("login") {
             // Login screen with navigation actions
-            LoginScreen(onLoginSuccess = { navController.navigate("home") }, goRegister = { navController.navigate("register") })
+            LoginScreen(
+                onLoginSuccess = { navController.navigate("home") },
+                goRegister = { navController.navigate("register") })
         }
         composable("register") {
             // Register screen with navigation actions
-            RegisterScreen(onRegisterSuccess = { navController.navigate("onBoarding") }, goLogin = { navController.navigate("login") })
+            RegisterScreen(
+                onRegisterSuccess = { navController.navigate("onBoarding") },
+                goLogin = { navController.navigate("login") })
         }
         composable("explore") {
             // Explore screen
@@ -73,8 +74,7 @@ fun Navigation(
             // Favorite screen with view model
             val viewModel: FavoriteViewModel = hiltViewModel()
             FavoriteScreen(
-                navController = navController,
-                viewModel = viewModel
+                navController = navController, viewModel = viewModel
             )
         }
         composable("profile") {

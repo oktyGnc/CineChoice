@@ -18,7 +18,7 @@ import javax.inject.Inject
 class DetailScreenViewModel @Inject constructor(
     private val addMovieToCartUseCase: AddMovieToCartUseCase,
     private val favoriteRepository: FavoriteRepository,
-    private val authDataSource: AuthDataSource
+    private val authDataSource: AuthDataSource,
 ) : ViewModel() {
     private val _favoriteMovies = MutableStateFlow<List<Movie>>(emptyList())
     val favoriteMovies: StateFlow<List<Movie>> = _favoriteMovies
@@ -45,14 +45,14 @@ class DetailScreenViewModel @Inject constructor(
         viewModelScope.launch {
             try {                 // Calls use case to add the movie to the cart
                 addMovieToCartUseCase.invoke(
-                    name, image, price, category, rating, year,
-                    director, description, orderAmount
+                    name, image, price, category, rating, year, director, description, orderAmount
                 )
             } catch (e: Exception) {
                 Log.e("CartViewModel", "Error adding movie: ${e.message}")
             }
         }
     }
+
     // Adds a movie to the favorites list
     fun addToFavorites(movie: Movie) {
         viewModelScope.launch {
@@ -62,13 +62,17 @@ class DetailScreenViewModel @Inject constructor(
                 }
 
                 is Resource.Error -> {
-                    Log.e("DetailScreenViewModel", "Error adding movie to favorites: ${resource.message}")
+                    Log.e(
+                        "DetailScreenViewModel",
+                        "Error adding movie to favorites: ${resource.message}"
+                    )
                 }
 
                 else -> Unit
             }
         }
     }
+
     // Loads the favorite movies for the current user
     fun loadFavorites() {
         viewModelScope.launch {
@@ -76,15 +80,21 @@ class DetailScreenViewModel @Inject constructor(
             when (val result = favoriteRepository.getFavoriteMovies(userId)) {
                 is Resource.Success -> {
                     Log.e("FavoriteViewModelGel", "Favorite movies loaded: ${result.data}")
-                    _favoriteMovies.value = result.data ?: emptyList()
+                    _favoriteMovies.value = result.data
                 }
+
                 is Resource.Error -> {
-                    Log.e("FavoriteViewModelHata", "Error loading favorite movies: ${result.message}")
+                    Log.e(
+                        "FavoriteViewModelHata",
+                        "Error loading favorite movies: ${result.message}"
+                    )
                 }
+
                 else -> Unit
             }
         }
     }
+
     // Removes a movie from the favorites list
     fun removeFavoriteMovie(movieId: Int) {
         viewModelScope.launch {
@@ -93,18 +103,21 @@ class DetailScreenViewModel @Inject constructor(
             loadFavorites()
         }
     }
+
     // Checks if a movie is in the favorites list
     fun checkFavoriteMovie(movieId: Int) {
         viewModelScope.launch {
             val userId = authDataSource.getUserId()
             when (val result = favoriteRepository.checkFavoriteMovie(userId, movieId)) {
                 is Resource.Success -> {
-                    _isFavorite.value = result.data ?: false   // Update favorite status
+                    _isFavorite.value = result.data   // Update favorite status
                 }
+
                 else -> _isFavorite.value = false // Set to false in case of error
             }
         }
     }
+
     // Toggles the favorite status of a movie
     fun toggleFavorite(movie: Movie) {
         viewModelScope.launch {

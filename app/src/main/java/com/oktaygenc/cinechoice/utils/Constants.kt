@@ -4,6 +4,7 @@ package com.oktaygenc.cinechoice.utils
 object Constants {
     // The base URL for the API.
     const val BASE_URL = "http://kasimadalan.pe.hu/"
+
     // Private constant holding the base URL for images.
     private const val IMAGE_BASE_URL = "http://kasimadalan.pe.hu/movies/images/"
 

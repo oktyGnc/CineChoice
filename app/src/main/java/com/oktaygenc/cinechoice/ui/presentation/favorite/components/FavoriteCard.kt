@@ -52,7 +52,7 @@ fun FavoriteCard(
                 model = getImageUrl(movie.image), // Fetch and display movie image
                 contentDescription = movie.name,
                 modifier = Modifier
-                    .size(60.dp,75.dp) // Set image size
+                    .size(60.dp, 75.dp) // Set image size
                     .padding(end = 12.dp),
                 contentScale = ContentScale.Crop // Crop image to fit the size
             )
@@ -85,14 +85,18 @@ fun FavoriteCard(
                         tint = SelectedButtonColor // Icon color
                     )
                     Text(
-                        text = movie.rating.toString(), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold
+                        text = movie.rating.toString(),
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold
                     )
                 }
             }
 
             IconButton(
                 onClick = onRemoveClick, // Handle remove from favorites action
-                modifier = Modifier.align(Alignment.CenterVertically).size(40.dp)
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .size(40.dp)
             ) {
                 Icon(
                     imageVector = Icons.Filled.Delete, // Display delete icon

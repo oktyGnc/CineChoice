@@ -32,8 +32,10 @@ class ExploreViewModel @Inject constructor(
     private fun loadMovies() {
         viewModelScope.launch {
             when (val movieList = getAllMoviesUseCase()) {
-                is Resource.Success -> _movies.value = movieList.data // On success, update the movie list
-                is Resource.Error -> _movies.value = emptyList() // On error, set movie list to empty
+                is Resource.Success -> _movies.value =
+                    movieList.data // On success, update the movie list
+                is Resource.Error -> _movies.value =
+                    emptyList() // On error, set movie list to empty
                 Resource.Empty -> TODO() // Empty state - to be handled
                 Resource.Loading -> TODO() // Loading state - to be handled
             }

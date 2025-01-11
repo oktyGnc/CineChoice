@@ -51,8 +51,7 @@ fun ProfileContent(
             // Profile picture (placeholder image in this case)
             Image(
                 painter = painterResource(id = R.drawable.nonamefoto), // Placeholder image
-                contentDescription = "Profile Picture",
-                modifier = Modifier.fillMaxSize()
+                contentDescription = "Profile Picture", modifier = Modifier.fillMaxSize()
             )
         }
 
@@ -62,8 +61,7 @@ fun ProfileContent(
         // Display the user's name
         Text(
             text = viewModel.getUserName(), // Fetch username from ViewModel
-            style = MaterialTheme.typography.h5,
-            fontWeight = FontWeight.Bold
+            style = MaterialTheme.typography.h5, fontWeight = FontWeight.Bold
         )
 
         // Spacer between username and other profile details
@@ -92,7 +90,8 @@ fun ProfileContent(
             onClick = { viewModel.logout(onLogoutSuccess) }, // Call logout function from ViewModel
             modifier = Modifier.fillMaxWidth(), // Button takes full width
             colors = ButtonDefaults.buttonColors(
-                contentColor = TextSelectedButtonColor, backgroundColor = SelectedButtonColor // Custom button colors
+                contentColor = TextSelectedButtonColor,
+                backgroundColor = SelectedButtonColor // Custom button colors
             )
         ) {
             // Button label

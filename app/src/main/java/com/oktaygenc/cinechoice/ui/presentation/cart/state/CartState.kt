@@ -16,7 +16,7 @@ data class CartState(
     val successMessage: String? = null,
 
     // Success status, typically used to track the success of an operation (e.g., 1 for success, 0 for failure)
-    val success: Int = 0
+    val success: Int = 0,
 )
 
 

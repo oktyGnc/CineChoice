@@ -34,7 +34,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -68,10 +67,13 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
     }
 
     Scaffold(topBar = {
-        TopAppBar(
-            title = {
-                Text(text = comingMovie.name, color = TopBarColor, fontFamily = oswald) // Movie name as title
-            },
+        TopAppBar(title = {
+            Text(
+                text = comingMovie.name,
+                color = TopBarColor,
+                fontFamily = oswald
+            ) // Movie name as title
+        },
             colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor),
             navigationIcon = {
                 IconButton(onClick = { navController.popBackStack() }) { // Back button
@@ -91,8 +93,7 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
                         tint = if (isFavorite) SelectedButtonColor else TopBarColor
                     )
                 }
-            }
-        )
+            })
     }) { paddingValues ->
         // Movie details screen content
         Column(
@@ -117,16 +118,50 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
             Spacer(modifier = Modifier.height(16.dp))
 
             // Movie information
-            Text(text = comingMovie.name, style = MaterialTheme.typography.h4, fontWeight = FontWeight.Bold, color = UnTextSelectedButtonColor)
-            Text(text = "Category: ${comingMovie.category}", style = MaterialTheme.typography.body2, color = TextGray, fontWeight = FontWeight.Bold)
-            Text(text = "Price: \$${comingMovie.price}", style = MaterialTheme.typography.body2, color = TextGray, fontWeight = FontWeight.Bold)
-            Text(text = "Rating: ${comingMovie.rating}", style = MaterialTheme.typography.body2, color = TextGray, fontWeight = FontWeight.Bold)
-            Text(text = "Year: ${comingMovie.year}", style = MaterialTheme.typography.body2, color = TextGray, fontWeight = FontWeight.Bold)
-            Text(text = "Director: ${comingMovie.director}", style = MaterialTheme.typography.body2, color = TextGray, fontWeight = FontWeight.Bold)
+            Text(
+                text = comingMovie.name,
+                style = MaterialTheme.typography.h4,
+                fontWeight = FontWeight.Bold,
+                color = UnTextSelectedButtonColor
+            )
+            Text(
+                text = "Category: ${comingMovie.category}",
+                style = MaterialTheme.typography.body2,
+                color = TextGray,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = "Price: \$${comingMovie.price}",
+                style = MaterialTheme.typography.body2,
+                color = TextGray,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = "Rating: ${comingMovie.rating}",
+                style = MaterialTheme.typography.body2,
+                color = TextGray,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = "Year: ${comingMovie.year}",
+                style = MaterialTheme.typography.body2,
+                color = TextGray,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = "Director: ${comingMovie.director}",
+                style = MaterialTheme.typography.body2,
+                color = TextGray,
+                fontWeight = FontWeight.Bold
+            )
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Text(text = comingMovie.description, color = UnTextSelectedButtonColor, modifier = Modifier.padding(vertical = 8.dp))
+            Text(
+                text = comingMovie.description,
+                color = UnTextSelectedButtonColor,
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
 
             // Order Count Controls
             Row(
@@ -195,8 +230,7 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
             ) {
                 Text(
                     text = "Add to Cart ($orderCount)", // Show the number of items being added
-                    color = TextSelectedButtonColor,
-                    fontWeight = FontWeight.Bold
+                    color = TextSelectedButtonColor, fontWeight = FontWeight.Bold
                 )
             }
         }

@@ -3,8 +3,8 @@ package com.oktaygenc.cinechoice.ui.presentation.register.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.oktaygenc.cinechoice.utils.Resource
 import com.oktaygenc.cinechoice.data.repository.auth.AuthRepository
+import com.oktaygenc.cinechoice.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
 ) : ViewModel() {
     // Companion object for logging tag
     companion object {
