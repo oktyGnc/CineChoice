@@ -40,6 +40,7 @@ import com.oktaygenc.cinechoice.presentation.screens.register.viewmodel.Register
 import com.oktaygenc.cinechoice.utils.Resource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 // Constants for Rive animation state machine
 private const val STATE_MACHINE_NAME = "State Machine 1"
 private const val DELAY = 500L
