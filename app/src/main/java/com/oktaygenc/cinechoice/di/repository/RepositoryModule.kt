@@ -13,12 +13,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
+    // Provides MoviesDataSource instance using MovieApi
     @Provides
     @Singleton
     fun provideMoviesDataSource(movieApi: MovieApi): MoviesDataSource {
         return MoviesDataSource(movieApi)
     }
 
+    // Provides MovieRepository instance using MoviesDataSource
     @Provides
     @Singleton
     fun provideMoviesRepository(moviesDataSource: MoviesDataSource): MovieRepository {

@@ -25,31 +25,39 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun OnboardingScreen(onFinished: () -> Unit) {
+    // Remember the pager state to handle page changes
     val pagerState = rememberPagerState(pageCount = { 3 })
     val coroutineScope = rememberCoroutineScope()
 
+    // Main layout for the onboarding screen
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // HorizontalPager to swipe through the onboarding items (pages)
         HorizontalPager(
             state = pagerState, modifier = Modifier.weight(1f)
         ) { page ->
+            // Display the content of each page based on the current page index
             OnboardingItem(page = page)
         }
 
+        // Row for the buttons (Skip and Next/Finish)
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
+            // Show the "Skip" button on all pages except the last one (page 2)
             if (pagerState.currentPage != 2) {
                 Button(
-                    onClick = { onFinished() }, colors = ButtonDefaults.buttonColors(
+                    onClick = { onFinished() },
+                    colors = ButtonDefaults.buttonColors(
                         containerColor = SelectedButtonColor, contentColor = TextSelectedButtonColor
-                    ), modifier = Modifier.padding(end = 8.dp)
+                    ),
+                    modifier = Modifier.padding(end = 8.dp)
                 ) {
                     Text(
                         text = "Skip",
@@ -58,19 +66,26 @@ fun OnboardingScreen(onFinished: () -> Unit) {
                     )
                 }
             }
+            // Spacer to align the buttons properly
             Spacer(modifier = Modifier.weight(1f))
+
+            // Show the "Next" button unless it's the last page, in which case show "Finish"
             Button(
                 onClick = {
                     if (pagerState.currentPage == 2) {
+                        // If it's the last page, finish the onboarding
                         onFinished()
                     } else {
+                        // Otherwise, move to the next page
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(pagerState.currentPage + 1)
                         }
                     }
-                }, colors = ButtonDefaults.buttonColors(
+                },
+                colors = ButtonDefaults.buttonColors(
                     containerColor = SelectedButtonColor, contentColor = TextSelectedButtonColor
-                ), modifier = Modifier.padding(end = 8.dp)
+                ),
+                modifier = Modifier.padding(end = 8.dp)
             ) {
                 Text(
                     text = if (pagerState.currentPage == 2) "Finish" else "Next",
@@ -81,3 +96,4 @@ fun OnboardingScreen(onFinished: () -> Unit) {
         }
     }
 }
+

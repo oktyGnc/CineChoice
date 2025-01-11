@@ -52,18 +52,22 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartScreen(navController: NavHostController) {
+    // ViewModel and state setup
     val viewModel: CartScreenViewModel = hiltViewModel()
     val cartMovies by viewModel.cartMovies.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
 
-    // Toplam tutarı hesaplayan fonksiyon
+    // Total amount calculation
     val totalAmount = cartMovies.sumOf { it.price * it.orderAmount }
+
+    // Fetch movies in cart on screen load
     LaunchedEffect(Unit) {
         viewModel.getMoviesInCart()
     }
 
     Scaffold(
         topBar = {
+            // TopAppBar with back navigation
             TopAppBar(
                 title = {
                     Text(text = "Your Cart", fontFamily = oswald)
@@ -78,11 +82,12 @@ fun CartScreen(navController: NavHostController) {
                     }
                 }
             )
-
         }, containerColor = Color.White
 
     ) { paddingValues ->
+
         Box {
+            // If cart is empty and not loading, show no items message
             if (cartMovies.isEmpty() && !isLoading) {
                 Column(
                     modifier = Modifier
@@ -94,6 +99,7 @@ fun CartScreen(navController: NavHostController) {
                     Text(text = "No items in your cart.")
                 }
             } else {
+                // If cart is not empty, display the list of movies
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -112,9 +118,10 @@ fun CartScreen(navController: NavHostController) {
                         }
                     }
 
+                    // Total amount and place order button
                     Row(
                         modifier = Modifier
-                            .size(500.dp, 80.dp) // Daha düşük bir yükseklik belirledik
+                            .size(500.dp, 80.dp)
                             .padding(8.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
@@ -126,10 +133,10 @@ fun CartScreen(navController: NavHostController) {
                             color = Color.Black
                         )
                         Button(
-                            onClick = { /* İşlem kodu */ },
+                            onClick = {  },
                             modifier = Modifier
-                                .size(200.dp, 40.dp) // Buton boyutunu daha kompakt hale getirdik
-                                .padding(start = 8.dp), // Sadece sol tarafına padding ekledik
+                                .size(200.dp, 40.dp)
+                                .padding(start = 8.dp),
                             colors = ButtonDefaults.buttonColors(containerColor = SelectedButtonColor)
                         ) {
                             Text(
@@ -143,6 +150,7 @@ fun CartScreen(navController: NavHostController) {
                 }
             }
 
+            // Show loading spinner while data is loading
             if (isLoading) {
                 Column(
                     modifier = Modifier.fillMaxSize(),

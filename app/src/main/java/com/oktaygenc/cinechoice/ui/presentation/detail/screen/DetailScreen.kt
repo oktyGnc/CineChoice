@@ -59,20 +59,22 @@ import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 @Composable
 fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
     val viewModel: DetailScreenViewModel = hiltViewModel()
-    val isFavorite by viewModel.isFavorite.collectAsStateWithLifecycle()
-    var orderCount by remember { mutableStateOf(1) }
+    val isFavorite by viewModel.isFavorite.collectAsStateWithLifecycle() // Collect favorite state
+    var orderCount by remember { mutableStateOf(1) } // Track the order count for the movie
 
+    // Check if the movie is already marked as a favorite when the screen is launched
     LaunchedEffect(comingMovie.id) {
         viewModel.checkFavoriteMovie(comingMovie.id)
     }
 
     Scaffold(topBar = {
-        TopAppBar(title = {
-            Text(text = comingMovie.name, color = TopBarColor, fontFamily = oswald)
-        },
+        TopAppBar(
+            title = {
+                Text(text = comingMovie.name, color = TopBarColor, fontFamily = oswald) // Movie name as title
+            },
             colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor),
             navigationIcon = {
-                IconButton(onClick = { navController.popBackStack() }) {
+                IconButton(onClick = { navController.popBackStack() }) { // Back button
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Back",
@@ -81,6 +83,7 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
                 }
             },
             actions = {
+                // Favorite button
                 IconButton(onClick = { viewModel.toggleFavorite(comingMovie) }) {
                     Icon(
                         imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
@@ -88,17 +91,18 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
                         tint = if (isFavorite) SelectedButtonColor else TopBarColor
                     )
                 }
-            })
+            }
+        )
     }) { paddingValues ->
+        // Movie details screen content
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(16.dp)
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
-            ) {
+            // Movie image
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 AsyncImage(
                     model = getImageUrl(comingMovie.image),
                     contentDescription = comingMovie.name,
@@ -111,48 +115,18 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
             }
 
             Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = comingMovie.name,
-                style = MaterialTheme.typography.h4,
-                fontWeight = FontWeight.Bold,
-                color = UnTextSelectedButtonColor,
-            )
-            Text(
-                text = "Category: ${comingMovie.category}",
-                style = MaterialTheme.typography.body2,
-                color = TextGray,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = "Price: \$${comingMovie.price}",
-                style = MaterialTheme.typography.body2,
-                color = TextGray,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = "Rating: ${comingMovie.rating}",
-                style = MaterialTheme.typography.body2,
-                color = TextGray,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = "Year: ${comingMovie.year}",
-                style = MaterialTheme.typography.body2,
-                color = TextGray,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = "Director: ${comingMovie.director}",
-                style = MaterialTheme.typography.body2,
-                color = TextGray,
-                fontWeight = FontWeight.Bold
-            )
+
+            // Movie information
+            Text(text = comingMovie.name, style = MaterialTheme.typography.h4, fontWeight = FontWeight.Bold, color = UnTextSelectedButtonColor)
+            Text(text = "Category: ${comingMovie.category}", style = MaterialTheme.typography.body2, color = TextGray, fontWeight = FontWeight.Bold)
+            Text(text = "Price: \$${comingMovie.price}", style = MaterialTheme.typography.body2, color = TextGray, fontWeight = FontWeight.Bold)
+            Text(text = "Rating: ${comingMovie.rating}", style = MaterialTheme.typography.body2, color = TextGray, fontWeight = FontWeight.Bold)
+            Text(text = "Year: ${comingMovie.year}", style = MaterialTheme.typography.body2, color = TextGray, fontWeight = FontWeight.Bold)
+            Text(text = "Director: ${comingMovie.director}", style = MaterialTheme.typography.body2, color = TextGray, fontWeight = FontWeight.Bold)
+
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = comingMovie.description,
-                color = UnTextSelectedButtonColor,
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
+
+            Text(text = comingMovie.description, color = UnTextSelectedButtonColor, modifier = Modifier.padding(vertical = 8.dp))
 
             // Order Count Controls
             Row(
@@ -162,13 +136,12 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                // Decrease button
                 IconButton(
                     onClick = { if (orderCount > 1) orderCount-- },
                     modifier = Modifier
                         .size(40.dp)
-                        .background(
-                            color = TopAndBottomBarColor, shape = CircleShape
-                        )
+                        .background(color = TopAndBottomBarColor, shape = CircleShape)
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.ic_decrease),
@@ -177,18 +150,19 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
                     )
                 }
 
+                // Order count display
                 Text(
                     text = orderCount.toString(),
                     style = MaterialTheme.typography.h6,
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
 
+                // Increase button
                 IconButton(
-                    onClick = { orderCount++ }, modifier = Modifier
+                    onClick = { orderCount++ },
+                    modifier = Modifier
                         .size(40.dp)
-                        .background(
-                            color = TopAndBottomBarColor, shape = CircleShape
-                        )
+                        .background(color = TopAndBottomBarColor, shape = CircleShape)
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.ic_increase),
@@ -199,9 +173,11 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
             }
 
             Spacer(modifier = Modifier.weight(1f))
+
+            // Add to Cart Button
             Button(
                 onClick = {
-                    navController.navigate("cart")
+                    navController.navigate("cart") // Navigate to cart screen
                     viewModel.addMovieToCart(
                         name = comingMovie.name,
                         image = comingMovie.image,
@@ -211,14 +187,14 @@ fun DetailScreen(navController: NavHostController, comingMovie: Movie) {
                         year = comingMovie.year,
                         director = comingMovie.director,
                         description = comingMovie.description,
-                        orderAmount = orderCount // Using the counter value
+                        orderAmount = orderCount // Using the order count value
                     )
                 },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(backgroundColor = SelectedButtonColor)
             ) {
                 Text(
-                    text = "Add to Cart ($orderCount)",
+                    text = "Add to Cart ($orderCount)", // Show the number of items being added
                     color = TextSelectedButtonColor,
                     fontWeight = FontWeight.Bold
                 )

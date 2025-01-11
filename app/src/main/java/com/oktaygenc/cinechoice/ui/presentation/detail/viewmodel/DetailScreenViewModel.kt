@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oktaygenc.cinechoice.data.datasource.auth.AuthDataSource
 import com.oktaygenc.cinechoice.data.model.entitiy.Movie
-import com.oktaygenc.cinechoice.data.repository.FavoriteRepository
+import com.oktaygenc.cinechoice.data.repository.favorite.FavoriteRepository
 import com.oktaygenc.cinechoice.usecase.AddMovieToCartUseCase
 import com.oktaygenc.cinechoice.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,9 +27,10 @@ class DetailScreenViewModel @Inject constructor(
     val isFavorite: StateFlow<Boolean> = _isFavorite
 
     init {
-        loadFavorites()
+        loadFavorites() // Load favorite movies initially
     }
 
+    // Adds a movie to the cart
     fun addMovieToCart(
         name: String,
         image: String,
@@ -42,7 +43,7 @@ class DetailScreenViewModel @Inject constructor(
         orderAmount: Int,
     ) {
         viewModelScope.launch {
-            try {
+            try {                 // Calls use case to add the movie to the cart
                 addMovieToCartUseCase.invoke(
                     name, image, price, category, rating, year,
                     director, description, orderAmount
@@ -52,7 +53,7 @@ class DetailScreenViewModel @Inject constructor(
             }
         }
     }
-
+    // Adds a movie to the favorites list
     fun addToFavorites(movie: Movie) {
         viewModelScope.launch {
             when (val resource = favoriteRepository.addFavoriteMovie(movie)) {
@@ -68,6 +69,7 @@ class DetailScreenViewModel @Inject constructor(
             }
         }
     }
+    // Loads the favorite movies for the current user
     fun loadFavorites() {
         viewModelScope.launch {
             val userId = authDataSource.getUserId()
@@ -83,7 +85,7 @@ class DetailScreenViewModel @Inject constructor(
             }
         }
     }
-
+    // Removes a movie from the favorites list
     fun removeFavoriteMovie(movieId: Int) {
         viewModelScope.launch {
             val userId = authDataSource.getUserId()
@@ -91,19 +93,19 @@ class DetailScreenViewModel @Inject constructor(
             loadFavorites()
         }
     }
-
+    // Checks if a movie is in the favorites list
     fun checkFavoriteMovie(movieId: Int) {
         viewModelScope.launch {
             val userId = authDataSource.getUserId()
             when (val result = favoriteRepository.checkFavoriteMovie(userId, movieId)) {
                 is Resource.Success -> {
-                    _isFavorite.value = result.data ?: false
+                    _isFavorite.value = result.data ?: false   // Update favorite status
                 }
-                else -> _isFavorite.value = false
+                else -> _isFavorite.value = false // Set to false in case of error
             }
         }
     }
-
+    // Toggles the favorite status of a movie
     fun toggleFavorite(movie: Movie) {
         viewModelScope.launch {
             if (_isFavorite.value) {

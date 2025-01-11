@@ -27,23 +27,22 @@ import com.oktaygenc.cinechoice.ui.theme.TextSelectedButtonColor
 import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 
 @Composable
-fun MovieCardForExplore(movie: Movie, modifier: Modifier = Modifier, onNavigateDetail: (Movie) -> Unit,) {
+fun MovieCardForExplore(movie: Movie, modifier: Modifier = Modifier, onNavigateDetail: (Movie) -> Unit) {
+    // Card that represents the movie item
     Card(
         modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 3.dp)
-            .clickable { onNavigateDetail(movie) },
+            .clickable { onNavigateDetail(movie) }, // Navigate on click
         elevation = CardDefaults.cardElevation(4.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = TextSelectedButtonColor,
-        )
+        colors = CardDefaults.cardColors(containerColor = TextSelectedButtonColor)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(12.dp)
         ) {
-
+            // Display movie image
             AsyncImage(
                 model = getImageUrl(movie.image),
                 contentDescription = movie.name,
@@ -52,6 +51,7 @@ fun MovieCardForExplore(movie: Movie, modifier: Modifier = Modifier, onNavigateD
                     .padding(end = 12.dp)
             )
 
+            // Column for movie details (name, category, rating)
             Column(
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.weight(1f)

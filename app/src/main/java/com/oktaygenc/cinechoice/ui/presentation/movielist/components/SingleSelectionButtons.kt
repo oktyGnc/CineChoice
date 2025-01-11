@@ -27,30 +27,29 @@ import com.oktaygenc.cinechoice.ui.theme.oswald
 fun SingleSelectionButtons(onCategorySelected: (String) -> Unit) {
     val categories = listOf("All", "Science Fiction", "Action", "Drama", "Fantastic")
 
-    // Seçilen kategori için state
-    val selectedCategory = remember { mutableStateOf("All") } // Başlangıçta "All" seçili
+    // Selected category state
+    val selectedCategory = remember { mutableStateOf("All") } // "All" selected by default
 
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.fillMaxWidth() // Yatay kaydırma için
+        modifier = Modifier.fillMaxWidth() // Horizontal scroll
     ) {
         items(categories) { category ->
             Button(
                 onClick = {
                     selectedCategory.value = category
-                    onCategorySelected(category) // Seçilen kategori üst component'e bildiriliyor
+                    onCategorySelected(category) // Notify the parent component
                 },
                 modifier = Modifier.padding(4.dp),
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = if (category == selectedCategory.value) TextSelectedButtonColor else UnTextSelectedButtonColor,
-                    backgroundColor = if (category == selectedCategory.value) SelectedButtonColor else UnSelectedButtonColor,
-
-
-                    )
+                    contentColor = if (category == selectedCategory.value) Color.White else Color.Black,
+                    backgroundColor = if (category == selectedCategory.value) SelectedButtonColor else UnSelectedButtonColor
+                )
             ) {
                 Text(text = category)
             }
         }
     }
 }
+
 

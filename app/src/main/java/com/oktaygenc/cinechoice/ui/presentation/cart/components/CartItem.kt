@@ -35,8 +35,9 @@ fun MovieItem(
     cartMovies: CartItemModel,
     onRemoveClick: (List<Int>) -> Unit,
 ) {
+    // Calculate total price for the cart item
     var cardPriceCheck = cartMovies.price * cartMovies.orderAmount
-    Log.d("MovieItemddebug", "OrderAmount for ${cartMovies.name}: ${cartMovies.orderAmount}")
+
     Card(
         modifier = Modifier
             .padding(8.dp)
@@ -48,6 +49,7 @@ fun MovieItem(
             modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // Display movie image
             AsyncImage(
                 model = getImageUrl(cartMovies.image),
                 contentDescription = cartMovies.name,
@@ -58,6 +60,7 @@ fun MovieItem(
 
             Spacer(modifier = Modifier.width(16.dp))
             Column(modifier = Modifier.weight(1f)) {
+                // Movie name and other details
                 Text(
                     text = cartMovies.name,
                     fontFamily = oswald,
@@ -78,6 +81,7 @@ fun MovieItem(
                     color = Color.Black
                 )
             }
+            // Remove movie from cart
             IconButton(
                 onClick = { onRemoveClick(cartMovies.cartIdList) },
                 modifier = Modifier.align(Alignment.CenterVertically)
@@ -92,4 +96,3 @@ fun MovieItem(
         }
     }
 }
-

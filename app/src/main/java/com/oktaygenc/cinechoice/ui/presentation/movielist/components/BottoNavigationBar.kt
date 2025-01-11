@@ -20,6 +20,7 @@ import com.oktaygenc.cinechoice.ui.theme.TopAndBottomBarColor
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
+    // List of bottom navigation items with labels, icons, and routes
     val items = listOf(
         BottomNavItem("Home", Icons.Default.Home, "home"),
         BottomNavItem("Explore", Icons.Default.Search, "explore"),
@@ -27,24 +28,30 @@ fun BottomNavigationBar(navController: NavController) {
         BottomNavItem("Profile", Icons.Default.Person, "profile")
     )
 
+    // NavigationBar container with a custom color
     NavigationBar(containerColor = TopAndBottomBarColor) {
+        // Get the current route from the nav controller's back stack
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
+        // Create a navigation item for each entry
         items.forEach { item ->
-            NavigationBarItem(icon = {
-                Icon(
-                    imageVector = item.icon,
-                    contentDescription = item.label
-                )
-            },
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        imageVector = item.icon,
+                        contentDescription = item.label
+                    )
+                },
                 label = { Text(item.label) },
-                selected = currentRoute == item.route,
+                selected = currentRoute == item.route, // Highlight selected item
                 onClick = {
+                    // Navigate if the current route is not the same as the item route
                     if (currentRoute != item.route) {
                         navController.navigate(item.route) {
+                            // Preserve state on navigation
                             popUpTo(navController.graph.startDestinationId) { saveState = true }
-                            launchSingleTop = true
+                            launchSingleTop = true // Avoid multiple instances of the same screen
                             restoreState = true
                         }
                     }
@@ -54,13 +61,14 @@ fun BottomNavigationBar(navController: NavController) {
                     selectedTextColor = Color.Black,
                     unselectedIconColor = Color.Gray,
                     unselectedTextColor = Color.Gray,
-                    indicatorColor = Color.Transparent
+                    indicatorColor = Color.Transparent // No indicator color
                 )
             )
         }
     }
 }
 
+// Data class for bottom navigation items
 data class BottomNavItem(
     val label: String,
     val icon: ImageVector,

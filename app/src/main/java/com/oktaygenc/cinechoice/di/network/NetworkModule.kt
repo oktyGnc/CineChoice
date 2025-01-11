@@ -14,6 +14,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    // Provides Retrofit instance with base URL and Gson converter
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit {
@@ -23,6 +24,7 @@ object NetworkModule {
             .build()
     }
 
+    // Provides MovieApi instance using Retrofit
     @Provides
     @Singleton
     fun provideMovieApi(retrofit: Retrofit): MovieApi {

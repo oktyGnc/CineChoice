@@ -14,7 +14,8 @@ import androidx.compose.ui.unit.dp
 import com.oktaygenc.cinechoice.R
 
 @Composable
-fun PagerItem(page: Int, modifier: Modifier = Modifier) {
+fun PagerItem(page: Int) {
+    // List of images
     val images = listOf(
         R.drawable.discountimage,
         R.drawable.filmimage1,
@@ -22,14 +23,18 @@ fun PagerItem(page: Int, modifier: Modifier = Modifier) {
         R.drawable.filmimage3
     )
 
+    // Ensure the page index is within bounds
+    val image = if (page in images.indices) images[page] else R.drawable.discountimage
+
     Surface(
-        modifier = modifier,
+        modifier = Modifier.fillMaxSize(),
         color = Color.DarkGray,
         shape = RoundedCornerShape(16.dp)
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
+            // Display the image
             Image(
-                painter = painterResource(id = images[page]),
+                painter = painterResource(id = image),
                 contentDescription = "Slide image $page",
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop

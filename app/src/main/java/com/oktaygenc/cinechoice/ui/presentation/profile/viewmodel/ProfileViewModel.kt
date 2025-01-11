@@ -11,18 +11,20 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
-// ProfileViewModel.kt
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) : ViewModel() {
+    // State flow to manage user authentication state
     private val _userState = MutableStateFlow<Resource<FirebaseUser>>(Resource.Empty)
     val userState: StateFlow<Resource<FirebaseUser>> = _userState
 
+    // Initialize view model by fetching current user
     init {
         getCurrentUser()
     }
 
+    // Retrieve and update current user state
     private fun getCurrentUser() {
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null) {
@@ -32,6 +34,7 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    // Handle user logout process
     fun logout(onLogoutSuccess: () -> Unit) {
         try {
             firebaseAuth.signOut()
@@ -42,10 +45,12 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    // Extract username from email
     fun getUserName(): String {
         return firebaseAuth.currentUser?.email?.substringBefore("@") ?: "Unknown User"
     }
 
+    // Retrieve user email
     fun getUserEmail(): String {
         return firebaseAuth.currentUser?.email ?: "No email"
     }

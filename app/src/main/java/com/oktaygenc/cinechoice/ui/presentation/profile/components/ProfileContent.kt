@@ -33,58 +33,69 @@ fun ProfileContent(
     viewModel: ProfileViewModel,
     onLogoutSuccess: () -> Unit,
 ) {
+    // Main container for the profile screen
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Profile picture container with circular clipping and border
         Box(
             modifier = Modifier
                 .size(120.dp)
-                .clip(CircleShape)
-                .border(2.dp, SelectedButtonColor, CircleShape)
+                .clip(CircleShape) // Clip the image to a circle
+                .border(2.dp, SelectedButtonColor, CircleShape) // Border around the circle
                 .padding(2.dp)
         ) {
+            // Profile picture (placeholder image in this case)
             Image(
-                painter = painterResource(id = R.drawable.nonamefoto),
+                painter = painterResource(id = R.drawable.nonamefoto), // Placeholder image
                 contentDescription = "Profile Picture",
                 modifier = Modifier.fillMaxSize()
             )
         }
 
+        // Spacer between the profile picture and username
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Display the user's name
         Text(
-            text = viewModel.getUserName(),
+            text = viewModel.getUserName(), // Fetch username from ViewModel
             style = MaterialTheme.typography.h5,
             fontWeight = FontWeight.Bold
         )
 
+        // Spacer between username and other profile details
         Spacer(modifier = Modifier.height(8.dp))
 
+        // Display the user's username label and value
         ProfileDetail(
             label = "Username",
-            value = viewModel.getUserName(),
+            value = viewModel.getUserName(), // Fetch username from ViewModel
         )
 
+        // Spacer between the username and email details
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Display the user's email label and value
         ProfileDetail(
             label = "Email",
-            value = viewModel.getUserEmail(),
+            value = viewModel.getUserEmail(), // Fetch user email from ViewModel
         )
 
+        // Spacer before the logout button
         Spacer(modifier = Modifier.height(30.dp))
 
-
+        // Log out button
         Button(
-            onClick = { viewModel.logout(onLogoutSuccess) },
-            modifier = Modifier.fillMaxWidth(),
+            onClick = { viewModel.logout(onLogoutSuccess) }, // Call logout function from ViewModel
+            modifier = Modifier.fillMaxWidth(), // Button takes full width
             colors = ButtonDefaults.buttonColors(
-                contentColor = TextSelectedButtonColor, backgroundColor = SelectedButtonColor
+                contentColor = TextSelectedButtonColor, backgroundColor = SelectedButtonColor // Custom button colors
             )
         ) {
+            // Button label
             Text("Log Out", fontWeight = FontWeight.Bold, fontSize = 16.sp)
         }
     }

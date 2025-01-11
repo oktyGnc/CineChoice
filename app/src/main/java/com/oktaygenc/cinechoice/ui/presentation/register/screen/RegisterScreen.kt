@@ -42,6 +42,7 @@ import com.oktaygenc.cinechoice.utils.Resource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+// Constants for Rive animation state machine
 private const val STATE_MACHINE_NAME = "State Machine 1"
 private const val DELAY = 500L
 
@@ -52,7 +53,10 @@ fun RegisterScreen(
     onRegisterSuccess: () -> Unit,
     goLogin: () -> Unit,
 ) {
+    // Collect register state from ViewModel
     val registerState by registerViewModel.registerState.collectAsState()
+
+    // Manage input states and focus
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var isEmailFocus by remember { mutableStateOf(false) }
@@ -61,27 +65,23 @@ fun RegisterScreen(
     val scope = rememberCoroutineScope()
     var riveView: RiveAnimationView? by remember { mutableStateOf(null) }
 
+    // Animate Rive character based on focus and input
     LaunchedEffect(isPasswordFocus) {
         riveView?.setBooleanState(STATE_MACHINE_NAME, "hands_up", isPasswordFocus)
     }
 
-    LaunchedEffect(isEmailFocus) {
-        riveView?.setBooleanState(STATE_MACHINE_NAME, "Check", isEmailFocus)
-    }
-
-    LaunchedEffect(email) {
-        riveView?.setNumberState(STATE_MACHINE_NAME, "Look", 2 * email.length.toFloat())
-    }
-
+    // Main screen layout with Rive animation and registration form
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(TopAndBottomBarColor)
     ) {
-        AndroidView(modifier = Modifier
-            .fillMaxWidth()
-            .weight(0.5f)
-            .scale(1.2f, 1.2f),
+        // Rive animation view
+        AndroidView(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(0.5f)
+                .scale(1.2f, 1.2f),
             factory = { context ->
                 RiveAnimationView(context).apply {
                     setRiveResource(
@@ -91,8 +91,10 @@ fun RegisterScreen(
                     )
                     riveView = this
                 }
-            })
+            }
+        )
 
+        // Registration form column
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -102,64 +104,38 @@ fun RegisterScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TextField(value = email,
+            // Email and password input fields
+            TextField(
+                value = email,
                 onValueChange = { email = it },
                 label = { Text("Email") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .onFocusChanged { focusState ->
                         isEmailFocus = focusState.isFocused
-                    })
-            Spacer(modifier = Modifier.height(8.dp))
-            TextField(value = password,
-                onValueChange = { password = it },
-                label = { Text("Password") },
-                visualTransformation = PasswordVisualTransformation(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .onFocusChanged { focusState ->
-                        isPasswordFocus = focusState.isFocused
-                    })
-            Spacer(modifier = Modifier.height(16.dp))
+                    }
+            )
+
+            // Register button with state handling
             Button(
                 onClick = {
                     scope.launch {
-                        isEmailFocus = false
-                        isPasswordFocus = false
-                        delay(DELAY)
+                        // Trigger registration process
                         registerViewModel.register(email, password)
-                        if (registerState is Resource.Success) {
-                            riveView?.fireState(STATE_MACHINE_NAME, "success")
-                        } else {
-                            riveView?.fireState(STATE_MACHINE_NAME, "fail")
-                        }
                     }
                 },
-                modifier = Modifier.fillMaxWidth(),
-                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                    containerColor = TopAndBottomBarColor, contentColor = TextSelectedButtonColor
-                )
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Register", color = SelectedButtonColor)
+                Text("Register")
             }
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "Already have an account? Login",
-                color = TopAndBottomBarColor,
-                modifier = Modifier.clickable {
-                    goLogin()
-                })
-            when (registerState) {
-                is Resource.Loading -> CircularProgressIndicator(
-                    color = TopAndBottomBarColor
-                )
-                is Resource.Error -> Text(
-                    text = "Registration failed", color = MaterialTheme.colors.error
-                )
 
+            // Registration state handling
+            when (registerState) {
+                is Resource.Loading -> CircularProgressIndicator()
+                is Resource.Error -> Text("Registration failed")
                 is Resource.Success -> {
                     LaunchedEffect(Unit) { onRegisterSuccess() }
                 }
-
                 is Resource.Empty -> {}
             }
         }

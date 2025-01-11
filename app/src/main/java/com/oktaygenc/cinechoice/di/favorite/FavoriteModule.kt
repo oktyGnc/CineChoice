@@ -1,10 +1,9 @@
-package com.oktaygenc.cinechoice.di
+package com.oktaygenc.cinechoice.di.favorite
 
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.oktaygenc.cinechoice.data.datasource.FavoriteDataSource
+import com.oktaygenc.cinechoice.data.datasource.favorite.FavoriteDataSource
 import com.oktaygenc.cinechoice.data.datasource.auth.AuthDataSource
-import com.oktaygenc.cinechoice.data.repository.FavoriteRepository
+import com.oktaygenc.cinechoice.data.repository.favorite.FavoriteRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,12 +14,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object FavoriteModule {
 
+    // Provides Firestore instance
     @Provides
     @Singleton
     fun provideFirestore(): FirebaseFirestore {
         return FirebaseFirestore.getInstance()
     }
 
+    // Provides FavoriteRepository with FavoriteDataSource and AuthDataSource
     @Provides
     @Singleton
     fun provideFavoriteRepository(
@@ -30,6 +31,7 @@ object FavoriteModule {
         return FavoriteRepository(favoriteDataSource, authDataSource)
     }
 
+    // Provides FavoriteDataSource with Firestore
     @Provides
     @Singleton
     fun provideFavoriteDataSource(firestore: FirebaseFirestore): FavoriteDataSource {

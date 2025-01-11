@@ -51,16 +51,22 @@ fun MovieListScreen(
     onNavigateDetail: (Movie) -> Unit,
     onAction: (MoviesAction) -> Unit,
 ) {
+    // Create scroll behavior for the TopAppBar
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+
+    // Create a scroll state for the LazyGrid
     val scrollState = rememberLazyGridState()
 
     Scaffold(
         topBar = {
+            // TopAppBar with a title and cart icon
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = TopAndBottomBarColor),
                 title = {
+                    // Box containing the app name centered in the TopAppBar
                     Box(
-                        modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.Center
                     ) {
                         Text(
                             text = "CineChoice",
@@ -73,9 +79,8 @@ fun MovieListScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = {
-                        onNavigateCart()
-                    }) {
+                    // Cart button in the TopAppBar
+                    IconButton(onClick = onNavigateCart) {
                         Icon(
                             modifier = Modifier.size(30.dp),
                             imageVector = Icons.Default.ShoppingCart,
@@ -88,21 +93,25 @@ fun MovieListScreen(
             )
         }
     ) { paddingValues ->
+        // Box wrapping the main content of the screen
         Box(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .nestedScroll(scrollBehavior.nestedScrollConnection)
-                .background(Color.White)
+                .fillMaxSize() // Take up the full screen
+                .padding(paddingValues) // Apply padding from Scaffold
+                .nestedScroll(scrollBehavior.nestedScrollConnection) // Connect to the scroll behavior
+                .background(Color.White) // White background
         ) {
+            // Display loading spinner or error message based on the state
             when {
                 state.isLoading -> {
+                    // Show a loading spinner while data is being fetched
                     CircularProgressIndicator(
                         modifier = Modifier.align(Alignment.Center)
                     )
                 }
 
                 state.error != null -> {
+                    // Show error message if there was an error fetching data
                     Text(
                         text = state.error,
                         color = MaterialTheme.colorScheme.error,
@@ -111,37 +120,38 @@ fun MovieListScreen(
                 }
 
                 else -> {
+                    // Show filtered movie items in a grid when data is loaded successfully
                     LazyVerticalGrid(
                         state = scrollState,
-                        columns = GridCells.Fixed(2),
-                        contentPadding = PaddingValues(8.dp),
-                        horizontalArrangement = Arrangement.spacedBy(20.dp),
-                        verticalArrangement = Arrangement.spacedBy(20.dp),
-                        modifier = Modifier.fillMaxSize()
+                        columns = GridCells.Fixed(2), // Use two columns in the grid
+                        contentPadding = PaddingValues(8.dp), // Padding around the grid
+                        horizontalArrangement = Arrangement.spacedBy(20.dp), // Spacing between columns
+                        verticalArrangement = Arrangement.spacedBy(20.dp), // Spacing between rows
+                        modifier = Modifier.fillMaxSize() // Fill the entire screen
                     ) {
-                        // Add pager as the first item spanning all columns
+                        // First item: AutoSlidingPager which spans both columns
                         item(span = { GridItemSpan(2) }) {
                             AutoSlidingPager()
                         }
 
-
+                        // Second item: Category selection buttons that span both columns
                         item(span = { GridItemSpan(2) }) {
                             SingleSelectionButtons(
                                 onCategorySelected = { category ->
-                                    onAction(MoviesAction.OnCategoryClick(category))
+                                    onAction(MoviesAction.OnCategoryClick(category)) // Notify parent component of category selection
                                 }
                             )
                         }
 
-                        // Add filtered movie items
+                        // Display each filtered movie item
                         items(state.filteredMovies) { movie ->
                             MovieCard(
                                 movie = movie,
                                 onAddToCartClick = {
-                                    onNavigateCart()
-                                    onAction(MoviesAction.OnCartClick(movie))
+                                    onNavigateCart() // Navigate to cart
+                                    onAction(MoviesAction.OnCartClick(movie)) // Add movie to cart
                                 },
-                                onClick = { onNavigateDetail(movie) }
+                                onClick = { onNavigateDetail(movie) } // Navigate to movie detail page
                             )
                         }
                     }
@@ -150,3 +160,4 @@ fun MovieListScreen(
         }
     }
 }
+

@@ -1,5 +1,6 @@
 package com.oktaygenc.cinechoice.data.model.entitiy
 
+// Data class representing an item in the shopping cart
 data class CardItem(
     val cartId: Int? = null,
     val name: String? = null,

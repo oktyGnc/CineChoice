@@ -14,18 +14,24 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun ProfileDetail(label: String, value: String) {
+    // Column to hold label and value text
     Column(modifier = Modifier.fillMaxWidth()) {
+        // Label text with bold styling and adjusted font size
         Text(
-            text = label,
+            text = label, // Label text ("Username", "Email")
             style = MaterialTheme.typography.caption.copy(
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp
+                fontWeight = FontWeight.Bold, // Bold font weight for the label
+                fontSize = 16.sp // Font size for the label
             )
         )
+
+        // Spacer between the label and value
         Spacer(modifier = Modifier.height(4.dp))
+
+        // Value text (e.g., actual username or email)
         Text(
-            text = value,
-            style = MaterialTheme.typography.body1
+            text = value, // Value associated with the label (e.g., actual username)
+            style = MaterialTheme.typography.body1 // Body style for the value text
         )
     }
 }

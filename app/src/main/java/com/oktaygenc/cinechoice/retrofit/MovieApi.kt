@@ -10,21 +10,23 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface MovieApi {
-    // Tüm Filmleri Getir
+    // Sends a GET request to fetch all movies.
     @GET("movies/getAllMovies.php")
     suspend fun getAllMovies(): MoviesApiResponse
 
-    // Kullanıcının Sepetindeki Filmleri Getir
+    // Sends a POST request to fetch movies in the user's cart.
     @POST("movies/getMovieCart.php")
     @FormUrlEncoded
     suspend fun getMoviesInCart(
+        // Retrieves the username (from UserSessionManager).
         @Field("userName") userName: String = UserSessionManager.getCurrentUser()
     ): CartApiResponse
 
-    // Sepete Film Ekle
+    // Sends a POST request to add a movie to the cart.
     @POST("movies/insertMovie.php")
     @FormUrlEncoded
     suspend fun addMovieToCart(
+        // Sends the movie details (name, image, price, category, etc.) as form data.
         @Field("name") name: String,
         @Field("image") image: String,
         @Field("price") price: Int,
@@ -34,14 +36,17 @@ interface MovieApi {
         @Field("director") director: String,
         @Field("description") description: String,
         @Field("orderAmount") orderAmount: Int,
+        // Retrieves the username (from UserSessionManager).
         @Field("userName") userName: String = UserSessionManager.getCurrentUser()
     ): AddDeleteResponse
 
-    // Sepetten Film Sil
+    // Sends a POST request to delete a movie from the cart.
     @POST("movies/deleteMovie.php")
     @FormUrlEncoded
     suspend fun deleteMovieFromCart(
+        // Sends the cart ID of the movie to be deleted.
         @Field("cartId") cartId: Int,
+        // Retrieves the username (from UserSessionManager).
         @Field("userName") userName: String = UserSessionManager.getCurrentUser()
     ): AddDeleteResponse
 }

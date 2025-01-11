@@ -31,8 +31,8 @@ import com.oktaygenc.cinechoice.utils.Constants.getImageUrl
 
 @Composable
 fun FavoriteCard(
-    movie: Movie,
-    onRemoveClick: () -> Unit,
+    movie: Movie, // Movie data to display
+    onRemoveClick: () -> Unit, // Action to remove the movie from favorites
 ) {
     Card(
         modifier = Modifier
@@ -40,7 +40,7 @@ fun FavoriteCard(
             .padding(vertical = 8.dp),
         elevation = CardDefaults.cardElevation(4.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = MaterialTheme.colorScheme.surface // Card background color
         )
     ) {
         Row(
@@ -49,12 +49,12 @@ fun FavoriteCard(
                 .padding(12.dp)
         ) {
             AsyncImage(
-                model = getImageUrl(movie.image),
+                model = getImageUrl(movie.image), // Fetch and display movie image
                 contentDescription = movie.name,
                 modifier = Modifier
-                    .size(60.dp,75.dp)
+                    .size(60.dp,75.dp) // Set image size
                     .padding(end = 12.dp),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop // Crop image to fit the size
             )
 
             // Movie details Section
@@ -79,10 +79,10 @@ fun FavoriteCard(
 
                 Row {
                     Icon(
-                        imageVector = Icons.Default.Star,
+                        imageVector = Icons.Default.Star, // Display rating star icon
                         contentDescription = "Remove from favorites",
                         modifier = Modifier.size(20.dp),
-                        tint = SelectedButtonColor
+                        tint = SelectedButtonColor // Icon color
                     )
                     Text(
                         text = movie.rating.toString(), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold
@@ -91,10 +91,11 @@ fun FavoriteCard(
             }
 
             IconButton(
-                onClick = onRemoveClick, modifier = Modifier.align(Alignment.CenterVertically).size(40.dp)
+                onClick = onRemoveClick, // Handle remove from favorites action
+                modifier = Modifier.align(Alignment.CenterVertically).size(40.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Filled.Delete,
+                    imageVector = Icons.Filled.Delete, // Display delete icon
                     contentDescription = "Remove from favorites",
                     tint = SelectedButtonColor,
                     modifier = Modifier.size(35.dp)

@@ -36,18 +36,18 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun FavoriteScreen(
-    navController: NavHostController,
-    viewModel: FavoriteViewModel
+    navController: NavHostController, // Navigation controller for screen navigation
+    viewModel: FavoriteViewModel // ViewModel to manage favorite movies
 ) {
-    var isLoading by remember { mutableStateOf(true) }
+    var isLoading by remember { mutableStateOf(true) } // Loading state to show progress indicator
 
     LaunchedEffect(Unit) {
-        delay(2000)
-        viewModel.loadFavorites()
-        isLoading = false
+        delay(2000) // Simulate loading delay
+        viewModel.loadFavorites() // Load favorite movies from ViewModel
+        isLoading = false // Set loading state to false once data is loaded
     }
 
-    val favoriteMovies = viewModel.favoriteMovies.collectAsStateWithLifecycle()
+    val favoriteMovies = viewModel.favoriteMovies.collectAsStateWithLifecycle() // Observe favorite movies
 
     Scaffold { paddingValues ->
         Box(
@@ -55,12 +55,12 @@ fun FavoriteScreen(
                 .padding(paddingValues)
                 .fillMaxSize()
         ) {
-            if (isLoading) {
+            if (isLoading) { // Show loading indicator while data is loading
                 CircularProgressIndicator(
                     color = SelectedButtonColor,
                     modifier = Modifier.align(Alignment.Center)
                 )
-            } else if (favoriteMovies.value.isEmpty()) {
+            } else if (favoriteMovies.value.isEmpty()) { // Display message when no favorites are added
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -69,28 +69,28 @@ fun FavoriteScreen(
                     verticalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        text = "No favorite movie added yet",
+                        text = "No favorite movie added yet", // Message when there are no favorites
                         style = MaterialTheme.typography.bodyLarge
                     )
                     Button(
-                        onClick = { navController.navigate("home") },
+                        onClick = { navController.navigate("home") }, // Navigate to home screen
                         modifier = Modifier.padding(top = 8.dp), colors = ButtonDefaults.buttonColors(
                             containerColor = SelectedButtonColor,
                             contentColor = TextSelectedButtonColor
                         )
                     ) {
-                        Text("Discover Movies")
+                        Text("Discover Movies") // Text on the button
                     }
                 }
-            } else {
+            } else { // Display list of favorite movies if available
                 LazyColumn(
                     contentPadding = PaddingValues(8.dp),
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    items(favoriteMovies.value) { movie ->
+                    items(favoriteMovies.value) { movie -> // Iterate over favorite movies
                         FavoriteCard(
                             movie = movie,
-                            onRemoveClick = { viewModel.removeFavoriteMovie(movie.id) }
+                            onRemoveClick = { viewModel.removeFavoriteMovie(movie.id) } // Remove movie from favorites
                         )
                     }
                 }
@@ -98,3 +98,4 @@ fun FavoriteScreen(
         }
     }
 }
+

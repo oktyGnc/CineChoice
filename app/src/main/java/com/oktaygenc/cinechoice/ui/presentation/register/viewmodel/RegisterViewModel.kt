@@ -15,63 +15,58 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
+    // Companion object for logging tag
     companion object {
         private const val TAG = "RegisterViewModel"
     }
 
+    // State flow to manage registration process
     private val _registerState = MutableStateFlow<Resource<String>>(Resource.Empty)
     val registerState: StateFlow<Resource<String>> = _registerState
 
+    // Main registration method with validation
     fun register(email: String, password: String) {
-        Log.d(TAG, "Registration initiated")
+        // Validate email format
         if (!isValidEmail(email)) {
-            Log.w(TAG, "Invalid email format: ${email.take(3)}***")
-            _registerState.value = Resource.Error("Geçersiz email formatı")
-            return
-        }
-        if (!isValidPassword(password)) {
-            Log.w(TAG, "Invalid password: too short")
-            _registerState.value = Resource.Error("Şifre en az 6 karakter olmalıdır")
+            _registerState.value = Resource.Error("Invalid email format")
             return
         }
 
+        // Validate password length
+        if (!isValidPassword(password)) {
+            _registerState.value = Resource.Error("Password must be at least 6 characters")
+            return
+        }
+
+        // Initiate registration process
         _registerState.value = Resource.Loading
         viewModelScope.launch {
-            Log.d(TAG, "Calling repository register")
             try {
+                // Call repository to register user
                 val result = authRepository.register(email, password)
-                Log.d(TAG, "Registration result: $result")
                 _registerState.value = result
 
+                // Handle different registration outcomes
                 when (result) {
-                    is Resource.Success -> {
-                        Log.i(TAG, "Registration successful")
-                    }
-                    is Resource.Error -> {
-                        Log.e(TAG, "Registration failed with error: ${result.message}")
-                    }
-                    else -> {
-                        Log.d(TAG, "Registration resulted in: $result")
-                    }
+                    is Resource.Success -> Log.i(TAG, "Registration successful")
+                    is Resource.Error -> Log.e(TAG, "Registration failed")
+                    else -> Log.d(TAG, "Registration process completed")
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "Registration failed in ViewModel", e)
-                e.printStackTrace()
-                _registerState.value = Resource.Error(e.message ?: "Beklenmeyen bir hata oluştu")
+                // Handle unexpected errors
+                _registerState.value = Resource.Error(e.message ?: "An unexpected error occurred")
             }
         }
     }
 
+    // Email validation method
     private fun isValidEmail(email: String): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches().also {
-            Log.d(TAG, "Email validation result: $it for ${email.take(3)}***")
-        }
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
+    // Password validation method
     private fun isValidPassword(password: String): Boolean {
-        return (password.length >= 6).also {
-            Log.d(TAG, "Password validation result: $it (length: ${password.length})")
-        }
+        return password.length >= 6
     }
 }
 

@@ -3,6 +3,7 @@ package com.oktaygenc.cinechoice.data.mapper
 import com.oktaygenc.cinechoice.data.model.entitiy.CardItem
 import com.oktaygenc.cinechoice.domain.model.CartItemModel
 
+// Extension function to convert a nullable CardItem to a non-nullable CartItemModel
 fun CardItem?.toModel() = CartItemModel(
     cartIdList = emptyList(),
     name = this?.name.orEmpty(),

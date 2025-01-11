@@ -36,6 +36,7 @@ fun Navigation(
         startDestination = startDestination
     ) {
         composable("home") {
+            // Movie list screen with view model and navigation actions
             val viewModel: MovieListScreenViewModel = hiltViewModel()
             val state by viewModel.state
             MovieListScreen(
@@ -49,21 +50,27 @@ fun Navigation(
             )
         }
         composable("splash") {
+            // Splash screen
             SplashScreen(navController)
         }
         composable("onBoarding") {
+            // Onboarding screen with navigation to home
             OnboardingScreen { navController.navigate("home") }
         }
         composable("login") {
-            LoginScreen(onLoginSuccess = { navController.navigate("home") },goRegister = { navController.navigate("register") })
+            // Login screen with navigation actions
+            LoginScreen(onLoginSuccess = { navController.navigate("home") }, goRegister = { navController.navigate("register") })
         }
         composable("register") {
-            RegisterScreen(onRegisterSuccess = { navController.navigate("onBoarding") },goLogin = { navController.navigate("login") })
+            // Register screen with navigation actions
+            RegisterScreen(onRegisterSuccess = { navController.navigate("onBoarding") }, goLogin = { navController.navigate("login") })
         }
         composable("explore") {
+            // Explore screen
             ExploreScreen(navController)
         }
         composable("favorite") {
+            // Favorite screen with view model
             val viewModel: FavoriteViewModel = hiltViewModel()
             FavoriteScreen(
                 navController = navController,
@@ -71,17 +78,20 @@ fun Navigation(
             )
         }
         composable("profile") {
+            // Profile screen
             ProfileScreen(navController)
         }
         composable(
             "detail/{comingMovie}",
             arguments = listOf(navArgument("comingMovie") { type = NavType.StringType })
         ) {
+            // Movie detail screen, receiving the movie as argument
             val json = it.arguments?.getString("comingMovie")
             val comingMovie = Gson().fromJson(json, Movie::class.java)
             DetailScreen(navController, comingMovie)
         }
         composable("cart") {
+            // Cart screen
             CartScreen(navController)
         }
     }

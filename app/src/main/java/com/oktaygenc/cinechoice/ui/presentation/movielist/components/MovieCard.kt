@@ -53,11 +53,14 @@ fun MovieCard(
 ) {
     var isFavorite by remember { mutableStateOf(false) }
 
-    Card(modifier = modifier
-        .clickable { onClick() }
-        .wrapContentHeight(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)) {
+    Card(
+        modifier = modifier
+            .clickable { onClick() }
+            .wrapContentHeight(),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+    ) {
         Box {
+            // Movie Image
             AsyncImage(
                 model = getImageUrl(movie.image),
                 contentDescription = movie.name,
@@ -67,6 +70,7 @@ fun MovieCard(
                     .size(150.dp, 225.dp)
             )
 
+            // Discount Banner
             Surface(
                 modifier = Modifier
                     .padding(8.dp)
@@ -82,15 +86,16 @@ fun MovieCard(
                     fontWeight = FontWeight.Bold
                 )
             }
-
         }
 
+        // Movie Details Section
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White)
                 .padding(16.dp)
         ) {
+            // Movie Name
             Text(
                 text = movie.name,
                 fontFamily = oswald,
@@ -99,6 +104,7 @@ fun MovieCard(
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
+            // Rating Row
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
@@ -110,21 +116,26 @@ fun MovieCard(
                     tint = SelectedButtonColor
                 )
                 Text(
-                    text = movie.rating.toString(), fontSize = 15.sp, color = Color.Gray
+                    text = movie.rating.toString(),
+                    fontSize = 15.sp,
+                    color = Color.Gray
                 )
             }
 
+            // Price and Add to Cart
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
+                // Old and New Price
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(
-                        text = "$${movie.price * 2}", style = TextStyle(
+                        text = "$${movie.price * 2}",
+                        style = TextStyle(
                             fontFamily = oswald,
                             textDecoration = TextDecoration.LineThrough,
                             color = Color.Gray,
@@ -139,8 +150,10 @@ fun MovieCard(
                     )
                 }
 
+                // Add to Cart Button
                 IconButton(
-                    onClick = { onAddToCartClick() }, modifier = Modifier.size(40.dp)
+                    onClick = { onAddToCartClick() },
+                    modifier = Modifier.size(40.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Filled.ShoppingCart,

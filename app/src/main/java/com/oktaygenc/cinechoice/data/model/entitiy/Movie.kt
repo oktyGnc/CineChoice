@@ -1,5 +1,6 @@
 package com.oktaygenc.cinechoice.data.model.entitiy
 
+// Data class representing a movie
 data class Movie(
     val id: Int = 0,
     val name: String = "",
@@ -11,5 +12,6 @@ data class Movie(
     val director: String = "",
     val description: String = ""
 ) {
+    // Secondary constructor providing default values
     constructor() : this(0, "", "", 0, "", 0.0, 0, "", "")
 }

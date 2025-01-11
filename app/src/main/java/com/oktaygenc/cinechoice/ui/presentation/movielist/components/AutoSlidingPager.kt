@@ -25,31 +25,32 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun AutoSlidingPager() {
-    val actualPageCount = 4
+    val actualPageCount = 4 // Total pages in the pager
 
     val pagerState = rememberPagerState(
-        pageCount = { actualPageCount },
-        initialPage = 0
+        pageCount = { actualPageCount }, // Set page count
+        initialPage = 0 // Start from the first page
     )
 
     val coroutineScope = rememberCoroutineScope()
 
+    // Automatic sliding of pages
     LaunchedEffect(key1 = Unit) {
         while(true) {
-            delay(4000L)
+            delay(4000L) // Wait for 4 seconds
             coroutineScope.launch {
-                val nextPage = (pagerState.currentPage + 1) % actualPageCount
-                pagerState.animateScrollToPage(page = nextPage)
+                val nextPage = (pagerState.currentPage + 1) % actualPageCount // Get next page
+                pagerState.animateScrollToPage(page = nextPage) // Animate page change
             }
         }
     }
 
-    // Ana container Box
+    // Main container Box for layout
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        // Pager Box
+        // Box for Pager UI
         Box(
             modifier = Modifier
                 .width(320.dp)
@@ -59,7 +60,7 @@ fun AutoSlidingPager() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(380.dp)
-                    .background(Color.White),
+                    .background(Color.White), // Pager background
                 state = pagerState,
                 pageSpacing = 10.dp,
             ) { page ->
@@ -68,7 +69,7 @@ fun AutoSlidingPager() {
                         .width(320.dp)
                         .height(380.dp)
                 ) {
-                    PagerItem(
+                    PagerItem( // Custom Pager item content
                         page = page,
                         modifier = Modifier
                             .align(Alignment.Center)
@@ -79,6 +80,7 @@ fun AutoSlidingPager() {
                 }
             }
 
+            // Page indicator dots at the bottom
             Row(
                 Modifier
                     .align(Alignment.BottomCenter)
@@ -87,9 +89,9 @@ fun AutoSlidingPager() {
             ) {
                 repeat(actualPageCount) { iteration ->
                     val color = if (pagerState.currentPage == iteration) {
-                        Color.White
+                        Color.White // Active page indicator
                     } else {
-                        Color.White.copy(alpha = 0.5f)
+                        Color.White.copy(alpha = 0.5f) // Inactive page indicator
                     }
                     Box(
                         modifier = Modifier

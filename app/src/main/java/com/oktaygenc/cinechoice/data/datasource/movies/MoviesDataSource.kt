@@ -9,8 +9,10 @@ import javax.inject.Inject
 class MoviesDataSource @Inject constructor(
     private val movieApi: MovieApi,
 ) {
+    // Fetches a list of all movies from the API
     suspend fun getAllMovies(): MoviesApiResponse = movieApi.getAllMovies()
 
+    // Adds a movie to the user's shopping cart using various movie details
     suspend fun addMovieToCart(
         name: String,
         image: String,
@@ -28,9 +30,11 @@ class MoviesDataSource @Inject constructor(
         )
     }
 
+    // Deletes a movie from the user's shopping cart using the cart ID
     suspend fun deleteMovieFromCart(cartId: Int): AddDeleteResponse {
         return movieApi.deleteMovieFromCart(cartId)
     }
 
+    // Retrieves the list of movies currently in the user's shopping cart
     suspend fun getMoviesInCart(): CartApiResponse = movieApi.getMoviesInCart()
 }

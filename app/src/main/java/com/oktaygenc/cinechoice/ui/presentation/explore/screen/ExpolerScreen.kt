@@ -24,19 +24,20 @@ import com.oktaygenc.cinechoice.ui.presentation.explore.viewmodel.ExploreViewMod
 fun ExploreScreen(
     navController: NavHostController
 ) {
-    val viewModel: ExploreViewModel = hiltViewModel()
-    val state = viewModel.movies.value
-    val searchQuery = viewModel.searchQuery.value
+    val viewModel: ExploreViewModel = hiltViewModel() // Get the ViewModel using Hilt
+    val state = viewModel.movies.value // Get the list of movies
+    val searchQuery = viewModel.searchQuery.value // Get the current search query
 
     Scaffold(
         content = { paddingValues ->
             Box(modifier = Modifier.padding(paddingValues)) {
                 Column(modifier = Modifier.fillMaxSize().padding(16.dp)
                 ) {
-                    SearchBar(viewModel = viewModel)
+                    SearchBar(viewModel = viewModel) // Search bar component
                     Spacer(modifier = Modifier.height(16.dp))
 
                     LazyColumn {
+                        // Filter and display movies based on search query
                         items(state.filter { movie ->
                             movie.name.contains(searchQuery, ignoreCase = true)
                         }) { movie ->
@@ -44,8 +45,8 @@ fun ExploreScreen(
                                 movie = movie,
                                 modifier = Modifier.padding(bottom = 8.dp),
                                 onNavigateDetail = {
-                                    val movieJson = Gson().toJson(it)
-                                    navController.navigate("detail/$movieJson")
+                                    val movieJson = Gson().toJson(it) // Convert movie object to JSON
+                                    navController.navigate("detail/$movieJson") // Navigate to movie detail screen
                                 }
                             )
                         }

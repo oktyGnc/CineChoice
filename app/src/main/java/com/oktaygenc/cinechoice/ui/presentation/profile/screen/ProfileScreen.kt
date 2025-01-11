@@ -18,7 +18,9 @@ fun ProfileScreen(
     Scaffold(content = { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
             ProfileContent(viewModel = viewModel, onLogoutSuccess = {
+                // Navigate to the login screen after successful logout
                 navController.navigate("login") {
+                    // Remove all previous screens in the navigation stack
                     popUpTo(navController.graph.id) {
                         inclusive = true
                     }

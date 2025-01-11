@@ -24,17 +24,17 @@ import com.oktaygenc.cinechoice.ui.theme.oswald
 
 @Composable
 fun SearchBar(
-    viewModel: ExploreViewModel, // ViewModel parametre olarak alınıyor
+    viewModel: ExploreViewModel, // ViewModel parameter for managing search query
     modifier: Modifier = Modifier,
 ) {
-    val searchQuery = viewModel.searchQuery.value
+    val searchQuery = viewModel.searchQuery.value // Get current search query
 
     OutlinedTextField(
         value = searchQuery,
         onValueChange = { newQuery ->
-            viewModel.onSearchQueryChanged(newQuery) // ViewModel'deki searchQuery'yi güncelliyoruz
+            viewModel.onSearchQueryChanged(newQuery) // Update search query in ViewModel
         },
-        label = { Text("Search", color = TopBarColor,fontFamily = oswald, fontSize = 18.sp) },
+        label = { Text("Search", color = TopBarColor, fontFamily = oswald, fontSize = 18.sp) },
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search, contentDescription = "Search Icon", tint = TopBarColor
