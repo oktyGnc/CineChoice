@@ -82,9 +82,6 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
-    // Glide
-    implementation(libs.landscapist.glide)
-
     // Lottie Animations
     implementation (libs.lottie.compose)
 
